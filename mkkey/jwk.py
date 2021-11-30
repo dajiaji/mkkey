@@ -115,11 +115,11 @@ def generate_jwk(
         raise ValueError(f"Invalid kty: {kty}.")
 
     if output_format == "json":
-        res["public"] = pk
-        res["secret"] = sk
+        res["public"] = {"jwk": pk}
+        res["secret"] = {"jwk": sk}
     elif output_format == "jwks":
-        res["public"] = {"keys": [pk]}
-        res["secret"] = {"keys": [sk]}
+        res["public"] = {"jwks": {"keys": [pk]}}
+        res["secret"] = {"jwks": {"keys": [sk]}}
     else:
         raise ValueError(f"Invalid output_format: {output_format}.")
     return res

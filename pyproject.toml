@@ -10,6 +10,15 @@ authors = ["Ajitomi Daisuke <dajiaji@gmail.com>"]
 readme = "README.md"
 repository = "https://github.com/dajiaji/mkkey"
 
+include = [
+  ".pre-commit-config.yaml",
+  "CHANGES.rst",
+  "CODE_OF_CONDUCT.md",
+  "LICENSE",
+  "tox.ini",
+  "mkkey/py.typed",
+]
+
 [tool.poetry.dependencies]
 python = "^3.6.2"
 cryptography = "^36.0.0"
