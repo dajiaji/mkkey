@@ -5,8 +5,10 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name = "mkkey"
 version = "0.1.0"
-description = ""
+description = "A Generic Application-Layer Key Generator supporting JWK and PASERK."
 authors = ["Ajitomi Daisuke <dajiaji@gmail.com>"]
+readme = "README.md"
+repository = "https://github.com/dajiaji/mkkey"
 
 [tool.poetry.dependencies]
 python = "^3.6.2"
