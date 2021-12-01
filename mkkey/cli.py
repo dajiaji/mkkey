@@ -118,6 +118,14 @@ def jwk():
     required=False,
     help="Key size (MUST be >=512).",
 )
+@click.option(
+    "-o",
+    "--output_format",
+    type=click.Choice(["json", "jwks"]),
+    default="json",
+    required=False,
+    help="Set output format.",
+)
 def jwk_rsa(
     alg: str,
     use: str = "",
@@ -125,6 +133,7 @@ def jwk_rsa(
     kid_size: int = 32,
     kid: str = "",
     key_size: int = 2048,
+    output_format: str = "json",
 ):
 
     """Generate RSA JWK."""
@@ -138,6 +147,7 @@ def jwk_rsa(
                 kid_size=kid_size,
                 kid=kid,
                 rsa_key_size=key_size,
+                output_format=output_format,
             )
         )
     except Exception as err:
