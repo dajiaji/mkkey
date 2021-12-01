@@ -31,9 +31,9 @@ def generate_public_paserk(version: int, kid: bool, rsa_key_size: int = 2048) ->
     )
     res: dict = {}
     pk = Key.new(version, "public", pub_pem)
-    res["public"] = {"key": pk.to_paserk()}
+    res["public"] = {"paserk": pk.to_paserk()}
     sk = Key.new(version, "public", priv_pem)
-    res["secret"] = {"key": sk.to_paserk()}
+    res["secret"] = {"paserk": sk.to_paserk()}
     if kid:
         res["public"]["kid"] = pk.to_paserk_id()
         res["secret"]["kid"] = sk.to_paserk_id()
