@@ -24,9 +24,9 @@ def generate_jwk(
     crv: str = "",
     alg: str = "",
     use: str = "",
+    kid: str = "",
     kid_policy: str = "none",
     kid_size: int = 32,
-    kid: str = "",
     output_format: str = "json",
     rsa_key_size: int = 2048,
 ) -> dict:

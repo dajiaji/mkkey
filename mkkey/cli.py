@@ -91,6 +91,13 @@ def jwk():
     help="Key usage.",
 )
 @click.option(
+    "--kid",
+    type=str,
+    default="",
+    required=False,
+    help="Key id for manural setting.",
+)
+@click.option(
     "--kid_policy",
     type=click.Choice(["none", "sha256"]),
     default="none",
@@ -103,13 +110,6 @@ def jwk():
     default=32,
     required=False,
     help="Key id size.",
-)
-@click.option(
-    "--kid",
-    type=str,
-    default="",
-    required=False,
-    help="Key id for manural setting.",
 )
 @click.option(
     "--key_size",
@@ -129,9 +129,9 @@ def jwk():
 def jwk_rsa(
     alg: str,
     use: str = "",
+    kid: str = "",
     kid_policy: str = "none",
     kid_size: int = 32,
-    kid: str = "",
     key_size: int = 2048,
     output_format: str = "json",
 ):
@@ -143,9 +143,9 @@ def jwk_rsa(
                 "RSA",
                 alg=alg,
                 use=use,
+                kid=kid,
                 kid_policy=kid_policy,
                 kid_size=kid_size,
-                kid=kid,
                 rsa_key_size=key_size,
                 output_format=output_format,
             )
@@ -176,6 +176,13 @@ def jwk_rsa(
     help="Key usage.",
 )
 @click.option(
+    "--kid",
+    type=str,
+    default="",
+    required=False,
+    help="Key id for manural setting.",
+)
+@click.option(
     "--kid_policy",
     type=click.Choice(["none", "sha256"]),
     default="none",
@@ -190,13 +197,6 @@ def jwk_rsa(
     help="Key id size.",
 )
 @click.option(
-    "--kid",
-    type=str,
-    default="",
-    required=False,
-    help="Key id for manural setting.",
-)
-@click.option(
     "-o",
     "--output_format",
     type=click.Choice(["json", "jwks"]),
@@ -208,9 +208,9 @@ def jwk_ec(
     crv: str,
     alg: str = "",
     use: str = "",
+    kid: str = "",
     kid_policy: str = "none",
     kid_size: int = 32,
-    kid: str = "",
     output_format: str = "json",
 ):
 
@@ -222,9 +222,9 @@ def jwk_ec(
                 crv=crv,
                 alg=alg,
                 use=use,
+                kid=kid,
                 kid_policy=kid_policy,
                 kid_size=kid_size,
-                kid=kid,
                 output_format=output_format,
             )
         )
@@ -254,6 +254,13 @@ def jwk_ec(
     help="Key usage.",
 )
 @click.option(
+    "--kid",
+    type=str,
+    default="",
+    required=False,
+    help="Key id for manural setting.",
+)
+@click.option(
     "--kid_policy",
     type=click.Choice(["none", "sha256"]),
     default="none",
@@ -268,13 +275,6 @@ def jwk_ec(
     help="Key id size.",
 )
 @click.option(
-    "--kid",
-    type=str,
-    default="",
-    required=False,
-    help="Key id for manural setting.",
-)
-@click.option(
     "-o",
     "--output_format",
     type=click.Choice(["json", "jwks"]),
@@ -286,9 +286,9 @@ def jwk_okp(
     crv: str,
     alg: str = "",
     use: str = "",
+    kid: str = "",
     kid_policy: str = "none",
     kid_size: int = 32,
-    kid: str = "",
     output_format: str = "json",
 ):
 
@@ -300,9 +300,9 @@ def jwk_okp(
                 crv=crv,
                 alg=alg,
                 use=use,
+                kid=kid,
                 kid_policy=kid_policy,
                 kid_size=kid_size,
-                kid=kid,
                 output_format=output_format,
             )
         )
