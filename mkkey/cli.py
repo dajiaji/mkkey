@@ -98,11 +98,11 @@ def jwk():
     help="Key id for manural setting.",
 )
 @click.option(
-    "--kid_policy",
+    "--kid_type",
     type=click.Choice(["none", "sha256"]),
     default="none",
     required=False,
-    help="Key id generation policy.",
+    help="Key id type.",
 )
 @click.option(
     "--kid_size",
@@ -130,7 +130,7 @@ def jwk_rsa(
     alg: str,
     use: str = "",
     kid: str = "",
-    kid_policy: str = "none",
+    kid_type: str = "none",
     kid_size: int = 32,
     key_size: int = 2048,
     output_format: str = "json",
@@ -144,7 +144,7 @@ def jwk_rsa(
                 alg=alg,
                 use=use,
                 kid=kid,
-                kid_policy=kid_policy,
+                kid_type=kid_type,
                 kid_size=kid_size,
                 rsa_key_size=key_size,
                 output_format=output_format,
@@ -183,11 +183,11 @@ def jwk_rsa(
     help="Key id for manural setting.",
 )
 @click.option(
-    "--kid_policy",
+    "--kid_type",
     type=click.Choice(["none", "sha256"]),
     default="none",
     required=False,
-    help="Key id generation policy.",
+    help="Key id type.",
 )
 @click.option(
     "--kid_size",
@@ -209,7 +209,7 @@ def jwk_ec(
     alg: str = "",
     use: str = "",
     kid: str = "",
-    kid_policy: str = "none",
+    kid_type: str = "none",
     kid_size: int = 32,
     output_format: str = "json",
 ):
@@ -223,7 +223,7 @@ def jwk_ec(
                 alg=alg,
                 use=use,
                 kid=kid,
-                kid_policy=kid_policy,
+                kid_type=kid_type,
                 kid_size=kid_size,
                 output_format=output_format,
             )
@@ -261,11 +261,11 @@ def jwk_ec(
     help="Key id for manural setting.",
 )
 @click.option(
-    "--kid_policy",
+    "--kid_type",
     type=click.Choice(["none", "sha256"]),
     default="none",
     required=False,
-    help="Key id generation policy.",
+    help="Key id type.",
 )
 @click.option(
     "--kid_size",
@@ -287,7 +287,7 @@ def jwk_okp(
     alg: str = "",
     use: str = "",
     kid: str = "",
-    kid_policy: str = "none",
+    kid_type: str = "none",
     kid_size: int = 32,
     output_format: str = "json",
 ):
@@ -301,7 +301,7 @@ def jwk_okp(
                 alg=alg,
                 use=use,
                 kid=kid,
-                kid_policy=kid_policy,
+                kid_type=kid_type,
                 kid_size=kid_size,
                 output_format=output_format,
             )

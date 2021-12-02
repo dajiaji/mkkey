@@ -25,7 +25,7 @@ def generate_jwk(
     alg: str = "",
     use: str = "",
     kid: str = "",
-    kid_policy: str = "none",
+    kid_type: str = "none",
     kid_size: int = 32,
     output_format: str = "json",
     rsa_key_size: int = 2048,
@@ -38,8 +38,8 @@ def generate_jwk(
     if kty == "RSA":
         k = rsa.generate_private_key(65537, key_size=rsa_key_size)
 
-        if not kid and kid_policy:
-            if kid_policy == "sha256":
+        if not kid and kid_type:
+            if kid_type == "sha256":
                 pk["kid"] = _generate_kid(
                     k.public_key().public_bytes(
                         serialization.Encoding.PEM,
@@ -49,7 +49,7 @@ def generate_jwk(
                     kid_size,
                 )
             else:
-                raise ValueError(f"Invalid kid_policy: {kid_policy}.")
+                raise ValueError(f"Invalid kid_type: {kid_type}.")
 
         # public
         pn = k.private_numbers().public_numbers
@@ -88,8 +88,8 @@ def generate_jwk(
         else:
             raise ValueError(f"Invalid crv for EC: {crv}.")
 
-        if not kid and kid_policy:
-            if kid_policy == "sha256":
+        if not kid and kid_type:
+            if kid_type == "sha256":
                 pk["kid"] = _generate_kid(
                     k.public_key().public_bytes(
                         serialization.Encoding.PEM,
@@ -99,7 +99,7 @@ def generate_jwk(
                     kid_size,
                 )
             else:
-                raise ValueError(f"Invalid kid_policy: {kid_policy}.")
+                raise ValueError(f"Invalid kid_type: {kid_type}.")
 
         # public
         pk["kty"] = "EC"
@@ -129,8 +129,8 @@ def generate_jwk(
         else:
             raise ValueError(f"Invalid crv for OKP: {crv}.")
 
-        if not kid and kid_policy:
-            if kid_policy == "sha256":
+        if not kid and kid_type:
+            if kid_type == "sha256":
                 pk["kid"] = _generate_kid(
                     k.public_key().public_bytes(
                         serialization.Encoding.PEM,
@@ -140,7 +140,7 @@ def generate_jwk(
                     kid_size,
                 )
             else:
-                raise ValueError(f"Invalid kid_policy: {kid_policy}.")
+                raise ValueError(f"Invalid kid_type: {kid_type}.")
 
         x = k.public_key().public_bytes(
             serialization.Encoding.Raw, serialization.PublicFormat.Raw
