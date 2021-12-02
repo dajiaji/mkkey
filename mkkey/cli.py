@@ -159,7 +159,7 @@ def jwk_rsa(
 @click.option(
     "--crv",
     type=click.Choice(["P-256", "P-384", "P-521", "secp256k1"]),
-    default="P-384",
+    default="P-256",
     required=True,
     help="Curve.",
 )
