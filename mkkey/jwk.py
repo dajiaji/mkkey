@@ -35,7 +35,7 @@ def generate_jwk(
     res: dict = {}
     pk: dict = {} if not kid else {"kid": kid}
 
-    if kty == "rsa":
+    if kty == "RSA":
         k = rsa.generate_private_key(65537, key_size=rsa_key_size)
 
         if not kid and kid_policy:
@@ -71,7 +71,7 @@ def generate_jwk(
         sk["dq"] = to_base64url_uint(sn.dmq1)
         sk["qi"] = to_base64url_uint(sn.iqmp)
 
-    elif kty == "ec":
+    elif kty == "EC":
         key_len: int
         if crv == "P-256":
             k = ec.generate_private_key(ec.SECP256R1())
@@ -121,7 +121,7 @@ def generate_jwk(
             k.private_numbers().private_value.to_bytes(key_len, byteorder="big")
         )
 
-    elif kty == "okp":
+    elif kty == "OKP":
         if crv == "Ed25519":
             k = Ed25519PrivateKey.generate()
         elif crv == "Ed448":

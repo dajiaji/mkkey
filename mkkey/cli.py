@@ -140,7 +140,7 @@ def jwk_rsa(
     try:
         show_result(
             generate_jwk(
-                "rsa",
+                "RSA",
                 alg=alg,
                 use=use,
                 kid_policy=kid_policy,
@@ -218,7 +218,7 @@ def jwk_ec(
     try:
         show_result(
             generate_jwk(
-                "ec",
+                "EC",
                 crv=crv,
                 alg=alg,
                 use=use,
@@ -296,7 +296,7 @@ def jwk_okp(
     try:
         show_result(
             generate_jwk(
-                "okp",
+                "OKP",
                 crv=crv,
                 alg=alg,
                 use=use,
