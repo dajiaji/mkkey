@@ -1,5 +1,6 @@
+import hashlib
 from copy import deepcopy
-from typing import Any
+from typing import Any, Callable
 
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec, rsa
@@ -7,6 +8,15 @@ from cryptography.hazmat.primitives.asymmetric.ed448 import Ed448PrivateKey
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 from .utils import base64url_encode, to_base64url_uint
+
+
+def _generate_kid(key_bytes: bytes, hash_func: Callable, size: int = 0) -> str:
+    src_kid = hash_func(key_bytes).digest()
+    if not size:
+        return base64url_encode(src_kid)
+    if len(src_kid) < size:
+        raise ValueError("size is longer than the source kid.")
+    return base64url_encode(src_kid[0:size])
 
 
 def generate_jwk(
@@ -23,12 +33,27 @@ def generate_jwk(
 
     k: Any
     res: dict = {}
+    pk: dict = {} if not kid else {"kid": kid}
+
     if kty == "rsa":
         k = rsa.generate_private_key(65537, key_size=rsa_key_size)
 
+        if not kid and kid_policy:
+            if kid_policy == "sha256":
+                pk["kid"] = _generate_kid(
+                    k.public_key().public_bytes(
+                        serialization.Encoding.PEM,
+                        serialization.PublicFormat.SubjectPublicKeyInfo,
+                    ),
+                    hashlib.sha256,
+                    kid_size,
+                )
+            else:
+                raise ValueError(f"Invalid kid_policy: {kid_policy}.")
+
         # public
         pn = k.private_numbers().public_numbers
-        pk = {"kty": "RSA"}
+        pk["kty"] = "RSA"
         if alg:
             pk["alg"] = alg
         if use:
@@ -63,8 +88,22 @@ def generate_jwk(
         else:
             raise ValueError(f"Invalid crv for EC: {crv}.")
 
+        if not kid and kid_policy:
+            if kid_policy == "sha256":
+                pk["kid"] = _generate_kid(
+                    k.public_key().public_bytes(
+                        serialization.Encoding.PEM,
+                        serialization.PublicFormat.SubjectPublicKeyInfo,
+                    ),
+                    hashlib.sha256,
+                    kid_size,
+                )
+            else:
+                raise ValueError(f"Invalid kid_policy: {kid_policy}.")
+
         # public
-        pk = {"kty": "EC", "crv": crv}
+        pk["kty"] = "EC"
+        pk["crv"] = crv
         if alg:
             pk["alg"] = alg
         if use:
@@ -90,6 +129,19 @@ def generate_jwk(
         else:
             raise ValueError(f"Invalid crv for OKP: {crv}.")
 
+        if not kid and kid_policy:
+            if kid_policy == "sha256":
+                pk["kid"] = _generate_kid(
+                    k.public_key().public_bytes(
+                        serialization.Encoding.PEM,
+                        serialization.PublicFormat.SubjectPublicKeyInfo,
+                    ),
+                    hashlib.sha256,
+                    kid_size,
+                )
+            else:
+                raise ValueError(f"Invalid kid_policy: {kid_policy}.")
+
         x = k.public_key().public_bytes(
             serialization.Encoding.Raw, serialization.PublicFormat.Raw
         )
@@ -100,7 +152,8 @@ def generate_jwk(
         )
 
         # public
-        pk = {"kty": "OKP", "crv": crv}
+        pk["kty"] = "OKP"
+        pk["crv"] = crv
         if alg:
             pk["alg"] = alg
         if use:
