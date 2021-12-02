@@ -38,7 +38,7 @@ def generate_jwk(
     if kty == "RSA":
         k = rsa.generate_private_key(65537, key_size=rsa_key_size)
 
-        if not kid and kid_type:
+        if not kid and kid_type != "none":
             if kid_type == "sha256":
                 pk["kid"] = _generate_kid(
                     k.public_key().public_bytes(
@@ -88,7 +88,7 @@ def generate_jwk(
         else:
             raise ValueError(f"Invalid crv for EC: {crv}.")
 
-        if not kid and kid_type:
+        if not kid and kid_type != "none":
             if kid_type == "sha256":
                 pk["kid"] = _generate_kid(
                     k.public_key().public_bytes(
@@ -129,7 +129,7 @@ def generate_jwk(
         else:
             raise ValueError(f"Invalid crv for OKP: {crv}.")
 
-        if not kid and kid_type:
+        if not kid and kid_type != "none":
             if kid_type == "sha256":
                 pk["kid"] = _generate_kid(
                     k.public_key().public_bytes(
