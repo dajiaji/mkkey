@@ -1,5 +1,5 @@
 from secrets import token_bytes
-from typing import Any
+from typing import Any, Union
 
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec, rsa
@@ -40,12 +40,12 @@ def generate_public_paserk(version: int, kid: bool, rsa_key_size: int = 2048) ->
     return res
 
 
-def generate_local_paserk(version: int, key_material: str, kid: bool) -> dict:
+def generate_local_paserk(version: int, key_material: Union[str, bytes], kid: bool) -> dict:
     res: dict = {}
     if not key_material:
-        key_material = token_bytes(32).decode()
+        key_material = token_bytes(32)
     sk = Key.new(version, "local", key_material)
-    res["secret"] = {"key": sk.to_paserk()}
+    res["secret"] = {"paserk": sk.to_paserk()}
     if kid:
         res["secret"]["kid"] = sk.to_paserk_id()
     return res

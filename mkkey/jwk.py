@@ -24,9 +24,9 @@ def generate_jwk(
     crv: str = "",
     alg: str = "",
     use: str = "",
-    kid_policy: str = "none",
-    kid_size: int = 32,
     kid: str = "",
+    kid_type: str = "none",
+    kid_size: int = 32,
     output_format: str = "json",
     rsa_key_size: int = 2048,
 ) -> dict:
@@ -35,11 +35,11 @@ def generate_jwk(
     res: dict = {}
     pk: dict = {} if not kid else {"kid": kid}
 
-    if kty == "rsa":
+    if kty == "RSA":
         k = rsa.generate_private_key(65537, key_size=rsa_key_size)
 
-        if not kid and kid_policy:
-            if kid_policy == "sha256":
+        if not kid and kid_type != "none":
+            if kid_type == "sha256":
                 pk["kid"] = _generate_kid(
                     k.public_key().public_bytes(
                         serialization.Encoding.PEM,
@@ -49,13 +49,12 @@ def generate_jwk(
                     kid_size,
                 )
             else:
-                raise ValueError(f"Invalid kid_policy: {kid_policy}.")
+                raise ValueError(f"Invalid kid_type: {kid_type}.")
 
         # public
         pn = k.private_numbers().public_numbers
         pk["kty"] = "RSA"
-        if alg:
-            pk["alg"] = alg
+        pk["alg"] = alg
         if use:
             pk["use"] = use
         pk["n"] = to_base64url_uint(pn.n)
@@ -71,25 +70,33 @@ def generate_jwk(
         sk["dq"] = to_base64url_uint(sn.dmq1)
         sk["qi"] = to_base64url_uint(sn.iqmp)
 
-    elif kty == "ec":
+    elif kty == "EC":
         key_len: int
         if crv == "P-256":
             k = ec.generate_private_key(ec.SECP256R1())
             key_len = 32
+            if alg and alg != "ES256":
+                raise ValueError("alg must be ES256.")
         elif crv == "P-384":
             k = ec.generate_private_key(ec.SECP384R1())
             key_len = 48
+            if alg and alg != "ES384":
+                raise ValueError("alg must be ES384.")
         elif crv == "P-521":
             k = ec.generate_private_key(ec.SECP521R1())
+            if alg and alg != "ES512":
+                raise ValueError("alg must be ES512.")
             key_len = 66
         elif crv == "secp256k1":
             k = ec.generate_private_key(ec.SECP256K1())
             key_len = 32
+            if alg and alg != "ES256K":
+                raise ValueError("alg must be ES256K.")
         else:
             raise ValueError(f"Invalid crv for EC: {crv}.")
 
-        if not kid and kid_policy:
-            if kid_policy == "sha256":
+        if not kid and kid_type != "none":
+            if kid_type == "sha256":
                 pk["kid"] = _generate_kid(
                     k.public_key().public_bytes(
                         serialization.Encoding.PEM,
@@ -99,7 +106,7 @@ def generate_jwk(
                     kid_size,
                 )
             else:
-                raise ValueError(f"Invalid kid_policy: {kid_policy}.")
+                raise ValueError(f"Invalid kid_type: {kid_type}.")
 
         # public
         pk["kty"] = "EC"
@@ -108,20 +115,14 @@ def generate_jwk(
             pk["alg"] = alg
         if use:
             pk["use"] = use
-        pk["x"] = base64url_encode(
-            k.public_key().public_numbers().x.to_bytes(key_len, byteorder="big")
-        )
-        pk["y"] = base64url_encode(
-            k.public_key().public_numbers().y.to_bytes(key_len, byteorder="big")
-        )
+        pk["x"] = base64url_encode(k.public_key().public_numbers().x.to_bytes(key_len, byteorder="big"))
+        pk["y"] = base64url_encode(k.public_key().public_numbers().y.to_bytes(key_len, byteorder="big"))
 
         # secret
         sk = deepcopy(pk)
-        sk["d"] = base64url_encode(
-            k.private_numbers().private_value.to_bytes(key_len, byteorder="big")
-        )
+        sk["d"] = base64url_encode(k.private_numbers().private_value.to_bytes(key_len, byteorder="big"))
 
-    elif kty == "okp":
+    elif kty == "OKP":
         if crv == "Ed25519":
             k = Ed25519PrivateKey.generate()
         elif crv == "Ed448":
@@ -129,8 +130,8 @@ def generate_jwk(
         else:
             raise ValueError(f"Invalid crv for OKP: {crv}.")
 
-        if not kid and kid_policy:
-            if kid_policy == "sha256":
+        if not kid and kid_type != "none":
+            if kid_type == "sha256":
                 pk["kid"] = _generate_kid(
                     k.public_key().public_bytes(
                         serialization.Encoding.PEM,
@@ -140,11 +141,9 @@ def generate_jwk(
                     kid_size,
                 )
             else:
-                raise ValueError(f"Invalid kid_policy: {kid_policy}.")
+                raise ValueError(f"Invalid kid_type: {kid_type}.")
 
-        x = k.public_key().public_bytes(
-            serialization.Encoding.Raw, serialization.PublicFormat.Raw
-        )
+        x = k.public_key().public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
         d = k.private_bytes(
             serialization.Encoding.Raw,
             serialization.PrivateFormat.Raw,
@@ -155,6 +154,8 @@ def generate_jwk(
         pk["kty"] = "OKP"
         pk["crv"] = crv
         if alg:
+            if alg != "EdDSA":
+                raise ValueError("alg must be EdDSA.")
             pk["alg"] = alg
         if use:
             pk["use"] = use
