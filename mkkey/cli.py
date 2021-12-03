@@ -76,17 +76,17 @@ def install_callback(ctx, attr, value):
         exit(1)
 
     click.echo(f"{shell} completion installed in ", nl=False)
-    click.secho(f"{path}", fg="green", bold=True, nl=False)
+    click.secho(f"{path}", fg="cyan", bold=True, nl=False)
     click.echo(".", nl=True)
     click.echo("", nl=True)
 
     if shell == "bash" or shell == "zsh":
         click.echo("Run ", nl=False)
-        click.secho(f". {path}", fg="green", bold=True, nl=False)
+        click.secho(f". {path}", fg="cyan", bold=True, nl=False)
         click.echo(" to activate the completion.", nl=True)
 
         click.echo("Run ", nl=False)
-        click.secho(f'echo -e ". {path}" >> ~/.{shell}rc', fg="green", bold=True, nl=False)
+        click.secho(f'echo -e ". {path}" >> ~/.{shell}rc', fg="cyan", bold=True, nl=False)
         click.echo(" to activate the completion permanently.", nl=True)
         click.echo("", nl=True)
     exit(0)
