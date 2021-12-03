@@ -76,7 +76,7 @@ def test_generate_jwk(kty, crv, alg, use, kid, kid_type, kid_size, output_format
         ("RSA", "", "RS256", "", "", "none", 0, "xxx", 2048, "Invalid output_format: xxx."),
     ],
 )
-def test_generate_jwk_invalid_arg(kty, crv, alg, use, kid, kid_type, kid_size, output_format, rsa_key_size, msg):
+def test_generate_jwk_with_invalid_arg(kty, crv, alg, use, kid, kid_type, kid_size, output_format, rsa_key_size, msg):
 
     with pytest.raises(ValueError) as err:
         generate_jwk(kty, crv, alg, use, kid, kid_type, kid_size, output_format, rsa_key_size)
