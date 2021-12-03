@@ -75,15 +75,23 @@ def generate_jwk(
         if crv == "P-256":
             k = ec.generate_private_key(ec.SECP256R1())
             key_len = 32
+            if alg and alg != "ES256":
+                raise ValueError("alg must be ES256.")
         elif crv == "P-384":
             k = ec.generate_private_key(ec.SECP384R1())
             key_len = 48
+            if alg and alg != "ES384":
+                raise ValueError("alg must be ES384.")
         elif crv == "P-521":
             k = ec.generate_private_key(ec.SECP521R1())
+            if alg and alg != "ES512":
+                raise ValueError("alg must be ES512.")
             key_len = 66
         elif crv == "secp256k1":
             k = ec.generate_private_key(ec.SECP256K1())
             key_len = 32
+            if alg and alg != "ES256K":
+                raise ValueError("alg must be ES256K.")
         else:
             raise ValueError(f"Invalid crv for EC: {crv}.")
 
@@ -146,6 +154,8 @@ def generate_jwk(
         pk["kty"] = "OKP"
         pk["crv"] = crv
         if alg:
+            if alg != "EdDSA":
+                raise ValueError("alg must be EdDSA.")
             pk["alg"] = alg
         if use:
             pk["use"] = use
