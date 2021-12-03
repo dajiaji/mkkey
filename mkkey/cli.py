@@ -191,7 +191,7 @@ def jwk_rsa(
 )
 @click.option(
     "--alg",
-    type=click.Choice(["EdDSA"]),
+    type=click.Choice(["ES256", "ES384", "ES512", "ES256K"]),
     required=False,
     help="Algorithm.",
 )
