@@ -54,8 +54,7 @@ def generate_jwk(
         # public
         pn = k.private_numbers().public_numbers
         pk["kty"] = "RSA"
-        if alg:
-            pk["alg"] = alg
+        pk["alg"] = alg
         if use:
             pk["use"] = use
         pk["n"] = to_base64url_uint(pn.n)
