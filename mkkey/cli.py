@@ -25,7 +25,7 @@ def _jwk(
     use: str = "",
     kid: str = "",
     kid_type: str = "none",
-    kid_size: int = 32,
+    kid_size: int = 0,
     output_format: str = "json",
     rsa_key_size: int = 2048,
 ):
@@ -121,35 +121,36 @@ def jwk():
     "--alg",
     type=click.Choice(["RS256", "RS384", "RS512", "PS256", "PS384", "PS512"]),
     default="RS256",
+    show_default=True,
     required=True,
-    help="Algorithm.",
+    help="Set algorithm ('alg').",
 )
 @click.option(
     "--use",
     type=click.Choice(["sig"]),
     required=False,
-    help="Key usage.",
+    help="Set public key usage ('use').",
 )
 @click.option(
     "--kid",
     type=str,
     default="",
     required=False,
-    help="Key id for manural setting.",
+    help="Set key id ('kid').",
 )
 @click.option(
     "--kid_type",
     type=click.Choice(["none", "sha256"]),
     default="none",
     required=False,
-    help="Key id type.",
+    help="Set auto key id generation method when '--kid' is not used.",
 )
 @click.option(
     "--kid_size",
     type=int,
-    default=32,
+    default=0,
     required=False,
-    help="Key id size.",
+    help="Set auto-generated key id size for truncation.",
 )
 @click.option(
     "-o",
@@ -163,15 +164,16 @@ def jwk():
     "--key_size",
     type=int,
     default=2048,
+    show_default=True,
     required=False,
-    help="Key size (MUST be >=512).",
+    help="Set the length of modulus in bits for RSA key (MUST be >=512).",
 )
 def jwk_rsa(
     alg: str,
     use: str = "",
     kid: str = "",
     kid_type: str = "none",
-    kid_size: int = 32,
+    kid_size: int = 0,
     output_format: str = "json",
     key_size: int = 2048,
 ):
@@ -186,41 +188,42 @@ def jwk_rsa(
     "--crv",
     type=click.Choice(["P-256", "P-384", "P-521", "secp256k1"]),
     default="P-256",
+    show_default=True,
     required=True,
-    help="Curve.",
+    help="Set curve ('crv').",
 )
 @click.option(
     "--alg",
     type=click.Choice(["ES256", "ES384", "ES512", "ES256K"]),
     required=False,
-    help="Algorithm.",
+    help="Set algorithm ('alg').",
 )
 @click.option(
     "--use",
     type=click.Choice(["sig"]),
     required=False,
-    help="Key usage.",
+    help="Set public key usage ('use').",
 )
 @click.option(
     "--kid",
     type=str,
     default="",
     required=False,
-    help="Key id for manural setting.",
+    help="Set key id ('kid').",
 )
 @click.option(
     "--kid_type",
     type=click.Choice(["none", "sha256"]),
     default="none",
     required=False,
-    help="Key id type.",
+    help="Set auto key id generation method when '--kid' is not used.",
 )
 @click.option(
     "--kid_size",
     type=int,
-    default=32,
+    default=0,
     required=False,
-    help="Key id size.",
+    help="Set auto-generated key id size for truncation.",
 )
 @click.option(
     "-o",
@@ -236,7 +239,7 @@ def jwk_ec(
     use: str = "",
     kid: str = "",
     kid_type: str = "none",
-    kid_size: int = 32,
+    kid_size: int = 0,
     output_format: str = "json",
 ):
 
@@ -250,41 +253,42 @@ def jwk_ec(
     "--crv",
     type=click.Choice(["Ed25519", "Ed448"]),
     default="Ed25519",
+    show_default=True,
     required=True,
-    help="Curve.",
+    help="Set curve ('crv').",
 )
 @click.option(
     "--alg",
     type=click.Choice(["EdDSA"]),
     required=False,
-    help="Algorithm.",
+    help="Set algorithm ('alg').",
 )
 @click.option(
     "--use",
     type=click.Choice(["sig"]),
     required=False,
-    help="Key usage.",
+    help="Set public key usage ('use').",
 )
 @click.option(
     "--kid",
     type=str,
     default="",
     required=False,
-    help="Key id for manural setting.",
+    help="Set key id ('kid').",
 )
 @click.option(
     "--kid_type",
     type=click.Choice(["none", "sha256"]),
     default="none",
     required=False,
-    help="Key id type.",
+    help="Set auto key id generation method when '--kid' is not used.",
 )
 @click.option(
     "--kid_size",
     type=int,
-    default=32,
+    default=0,
     required=False,
-    help="Key id size.",
+    help="Set auto-generated key id size for truncation.",
 )
 @click.option(
     "-o",
@@ -300,7 +304,7 @@ def jwk_okp(
     use: str = "",
     kid: str = "",
     kid_type: str = "none",
-    kid_size: int = 32,
+    kid_size: int = 0,
     output_format: str = "json",
 ):
 
@@ -324,9 +328,10 @@ def v4():
     "--kid/--no-kid",
     default=False,
     required=False,
-    help="Generate key id or not.",
+    help="Set PASERK ID ('kid') or not.",
 )
 def paserk_v4_public(kid: bool):
+    """Generate v4.public PASERK for Asymmetric-key digital signatures."""
     _paserk_public(4, kid)
     return
 
@@ -342,9 +347,10 @@ def paserk_v4_public(kid: bool):
     "--kid/--no-kid",
     default=False,
     required=False,
-    help="Generate key id or not.",
+    help="Set PASERK ID ('kid') or not.",
 )
 def paserk_v4_local(key_material: str, kid: bool = True):
+    """Generate v4.local PASERK for Symmetric-key encryption (AEAD)."""
     _paserk_local(4, key_material, kid)
     return
 
@@ -359,9 +365,10 @@ def v3():
     "--kid/--no-kid",
     default=False,
     required=False,
-    help="Generate key id or not.",
+    help="Set PASERK ID ('kid') or not.",
 )
 def paserk_v3_public(kid: bool):
+    """Generate v3.public PASERK for Asymmetric-key digital signatures."""
     _paserk_public(3, kid)
     return
 
@@ -377,9 +384,10 @@ def paserk_v3_public(kid: bool):
     "--kid/--no-kid",
     default=False,
     required=False,
-    help="Generate key id or not.",
+    help="Set PASERK ID ('kid') or not.",
 )
 def paserk_v3_local(key_material: str, kid: bool = True):
+    """Generate v3.local PASERK for Symmetric-key encryption (AEAD)."""
     _paserk_local(3, key_material, kid)
     return
 
@@ -394,9 +402,10 @@ def v2():
     "--kid/--no-kid",
     default=False,
     required=False,
-    help="Generate key id or not.",
+    help="Set PASERK ID ('kid') or not.",
 )
 def paserk_v2_public(kid: bool):
+    """Generate v2.public PASERK for Asymmetric-key digital signatures."""
     _paserk_public(2, kid)
     return
 
@@ -412,9 +421,10 @@ def paserk_v2_public(kid: bool):
     "--kid/--no-kid",
     default=False,
     required=False,
-    help="Generate key id or not.",
+    help="Set PASERK ID ('kid') or not.",
 )
 def paserk_v2_local(key_material: str, kid: bool = True):
+    """Generate v2.local PASERK for Symmetric-key encryption (AEAD)."""
     _paserk_local(2, key_material, kid)
     return
 
@@ -429,16 +439,18 @@ def v1():
     "--kid/--no-kid",
     default=False,
     required=False,
-    help="Generate key id or not.",
+    help="Set PASERK ID ('kid') or not.",
 )
 @click.option(
     "--key_size",
     type=int,
     default=2048,
+    show_default=True,
     required=False,
-    help="Key size (MUST be >=512).",
+    help="Set the length of modulus in bits for RSA key (MUST be >=512).",
 )
 def paserk_v1(kid: bool, key_size: int):
+    """Generate v1.public PASERK for Asymmetric-key digital signatures."""
     _paserk_public(1, kid, rsa_key_size=key_size)
     return
 
@@ -457,5 +469,6 @@ def paserk_v1(kid: bool, key_size: int):
     help="Generate key id or not.",
 )
 def paserk_v1_local(key_material: str, kid: bool = True):
+    """Generate v1.local PASERK for Symmetric-key encryption (AEAD)."""
     _paserk_local(1, key_material, kid)
     return
