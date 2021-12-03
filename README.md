@@ -1,11 +1,14 @@
-# mkkey - A Application-Layer Key Generator supporting JWK and PASERK.
+# mkkey - An Application-Layer Key Generator supporting JWK and PASERK.
 
 [![PyPI version](https://badge.fury.io/py/mkkey.svg)](https://badge.fury.io/py/mkkey)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mkkey)
 ![Github CI](https://github.com/dajiaji/mkkey/actions/workflows/python-package.yml/badge.svg)
 [![codecov](https://codecov.io/gh/dajiaji/mkkey/branch/main/graph/badge.svg?token=QN8GXEYEP3)](https://codecov.io/gh/dajiaji/mkkey)
 
-mkkkey is a CLI tool for generating application-layer keys: JWK (JSON Web Key) and PASERK (Platform-Agnositc Serialized Keys).
+mkkey is a CLI tool for generating following application-layer keys:
+- [JWK (JSON Web Key) - RFC7517](https://datatracker.ietf.org/doc/html/rfc7517)
+- [PASERK (Platform-Agnositc Serialized Keys)](https://github.com/paseto-standard/paserk)
+
 
 You can install mkkey with pip:
 
@@ -13,7 +16,7 @@ You can install mkkey with pip:
 $ pip install mkkey
 ```
 
-And then, use it as follows.
+And then, you can use it as follows.
 
 
 For JWK:
@@ -54,4 +57,12 @@ $ mkkey paserk v4 public
     }
 }
 
+```
+
+See help for details:
+
+```sh
+$ mkkey --help
+$ mkkey jwk --help
+$ mkkey paserk --help
 ```
