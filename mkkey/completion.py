@@ -10,16 +10,18 @@ class InstallCompletionError(Exception):
         super().__init__(msg)
 
 
-def install() -> Tuple[str, str]:
-    path: str = ""
-    shell: str = shellingham.detect_shell()[0]
+def _get_path(shell: str) -> str:
     if shell == "bash":
-        path = "~/.mkkey-complete.bash"
-    elif shell == "zsh":
-        path = "~/.mkkey-complete.zsh"
-    elif shell == "fish":
-        path = "~/.config/fish/completions/mkkey.fish"
-    else:
-        raise InstallCompletionError(shell, f"Unsupported shell: {shell}.")
+        return "~/.mkkey-complete.bash"
+    if shell == "zsh":
+        return "~/.mkkey-complete.zsh"
+    if shell == "fish":
+        return "~/.config/fish/completions/mkkey.fish"
+    raise InstallCompletionError(shell, f"Unsupported shell: {shell}.")
+
+
+def install() -> Tuple[str, str]:
+    shell: str = shellingham.detect_shell()[0]
+    path = _get_path(shell)
     subprocess.call(f"_MKKEY_COMPLETE={shell}_source mkkey > {path}", shell=True)
     return shell, path
