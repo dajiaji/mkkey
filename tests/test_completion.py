@@ -1,12 +1,11 @@
 import pytest
 
-from mkkey.completion import InstallCompletionError, _get_path, install
+from mkkey.completion import InstallCompletionError, _get_path
 
-
-def test_install():
-    shell, path = install()
-    assert shell in ["bash", "zsh", "fish"]
-    assert isinstance(path, str)
+# def test_install():
+#     shell, path = install()
+#     assert shell in ["bash", "zsh", "fish"]
+#     assert isinstance(path, str)
 
 
 @pytest.mark.parametrize(
