@@ -38,13 +38,9 @@ from mkkey.jwk import generate_jwk
         ("OKP", "Ed25519", "", "sig", "", "none", 0, "json", 0),
     ],
 )
-def test_generate_jwk(
-    kty, crv, alg, use, kid, kid_type, kid_size, output_format, rsa_key_size
-):
+def test_generate_jwk(kty, crv, alg, use, kid, kid_type, kid_size, output_format, rsa_key_size):
 
-    res = generate_jwk(
-        kty, crv, alg, use, kid, kid_type, kid_size, output_format, rsa_key_size
-    )
+    res = generate_jwk(kty, crv, alg, use, kid, kid_type, kid_size, output_format, rsa_key_size)
     assert "secret" in res
     assert "public" in res
     if output_format == "json":
@@ -74,52 +70,15 @@ def test_generate_jwk(
         ("EC", "P-256", "", "", "", "xxx", 0, "json", 0, "Invalid kid_type: xxx."),
         ("OKP", "Ed25519", "", "", "", "xxx", 0, "json", 0, "Invalid kid_type: xxx."),
         ("EC", "P-xxx", "", "", "", "none", 0, "json", 0, "Invalid crv for EC: P-xxx."),
-        (
-            "OKP",
-            "xxx",
-            "",
-            "",
-            "",
-            "none",
-            0,
-            "json",
-            0,
-            "Invalid crv for OKP: xxx.",
-        ),
-        (
-            "RSA",
-            "",
-            "RS256",
-            "",
-            "",
-            "sha256",
-            64,
-            "json",
-            2048,
-            "size is longer than the source kid",
-        ),
+        ("OKP", "xxx", "", "", "", "none", 0, "json", 0, "Invalid crv for OKP: xxx."),
+        ("RSA", "", "RS256", "", "", "sha256", 64, "json", 2048, "size is longer than the source kid"),
         ("xxx", "", "RS256", "", "", "none", 0, "json", 2048, "Invalid kty: xxx."),
-        (
-            "RSA",
-            "",
-            "RS256",
-            "",
-            "",
-            "none",
-            0,
-            "xxx",
-            2048,
-            "Invalid output_format: xxx.",
-        ),
+        ("RSA", "", "RS256", "", "", "none", 0, "xxx", 2048, "Invalid output_format: xxx."),
     ],
 )
-def test_generate_jwk_invalid_arg(
-    kty, crv, alg, use, kid, kid_type, kid_size, output_format, rsa_key_size, msg
-):
+def test_generate_jwk_invalid_arg(kty, crv, alg, use, kid, kid_type, kid_size, output_format, rsa_key_size, msg):
 
     with pytest.raises(ValueError) as err:
-        generate_jwk(
-            kty, crv, alg, use, kid, kid_type, kid_size, output_format, rsa_key_size
-        )
+        generate_jwk(kty, crv, alg, use, kid, kid_type, kid_size, output_format, rsa_key_size)
         pytest.fail("generate_jwk() must fail.")
     assert msg in str(err.value)
