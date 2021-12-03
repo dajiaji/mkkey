@@ -7,6 +7,6 @@ Unreleased
 Version 0.1.0
 -------------
 
-Released 2021-11-27
+Released 2021-12-03
 
-- First public release. `#1 <https://github.com/dajiaji/python-cwt/pull/1>`__
+- First public release.
