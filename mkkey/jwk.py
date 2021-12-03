@@ -107,18 +107,12 @@ def generate_jwk(
             pk["alg"] = alg
         if use:
             pk["use"] = use
-        pk["x"] = base64url_encode(
-            k.public_key().public_numbers().x.to_bytes(key_len, byteorder="big")
-        )
-        pk["y"] = base64url_encode(
-            k.public_key().public_numbers().y.to_bytes(key_len, byteorder="big")
-        )
+        pk["x"] = base64url_encode(k.public_key().public_numbers().x.to_bytes(key_len, byteorder="big"))
+        pk["y"] = base64url_encode(k.public_key().public_numbers().y.to_bytes(key_len, byteorder="big"))
 
         # secret
         sk = deepcopy(pk)
-        sk["d"] = base64url_encode(
-            k.private_numbers().private_value.to_bytes(key_len, byteorder="big")
-        )
+        sk["d"] = base64url_encode(k.private_numbers().private_value.to_bytes(key_len, byteorder="big"))
 
     elif kty == "OKP":
         if crv == "Ed25519":
@@ -141,9 +135,7 @@ def generate_jwk(
             else:
                 raise ValueError(f"Invalid kid_type: {kid_type}.")
 
-        x = k.public_key().public_bytes(
-            serialization.Encoding.Raw, serialization.PublicFormat.Raw
-        )
+        x = k.public_key().public_bytes(serialization.Encoding.Raw, serialization.PublicFormat.Raw)
         d = k.private_bytes(
             serialization.Encoding.Raw,
             serialization.PrivateFormat.Raw,
