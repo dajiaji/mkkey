@@ -8,14 +8,57 @@ from .jwk import generate_jwk
 from .paserk import generate_local_paserk, generate_public_paserk
 
 
-def show_result(res: dict):
+def _show_result(res: dict):
     click.secho(json.dumps(res, indent=4), fg="cyan")
     return
 
 
-def show_error(err: Exception):
+def _show_error(err: Exception):
     click.secho(f"Failed to make key: {err}", err=True, fg="red")
     return
+
+
+def _jwk(
+    kty: str,
+    crv: str = "",
+    alg: str = "",
+    use: str = "",
+    kid: str = "",
+    kid_type: str = "none",
+    kid_size: int = 32,
+    output_format: str = "json",
+    rsa_key_size: int = 2048,
+):
+    try:
+        _show_result(
+            generate_jwk(
+                kty,
+                crv=crv,
+                alg=alg,
+                use=use,
+                kid=kid,
+                kid_type=kid_type,
+                kid_size=kid_size,
+                output_format=output_format,
+            )
+        )
+    except Exception as err:
+        _show_error(err)
+    return
+
+
+def _paserk_public(version: int, kid: bool, rsa_key_size: int = 2048):
+    try:
+        _show_result(generate_public_paserk(version, kid, rsa_key_size=rsa_key_size))
+    except Exception as err:
+        _show_error(err)
+
+
+def _paserk_local(version: int, key_material: str, kid: bool):
+    try:
+        _show_result(generate_local_paserk(version, key_material, kid))
+    except Exception as err:
+        _show_error(err)
 
 
 def install_callback(ctx, attr, value):
@@ -43,9 +86,7 @@ def install_callback(ctx, attr, value):
         click.echo(" to activate the completion.", nl=True)
 
         click.echo("Run ", nl=False)
-        click.secho(
-            f'echo -e ". {path}" >> ~/.{shell}rc', fg="green", bold=True, nl=False
-        )
+        click.secho(f'echo -e ". {path}" >> ~/.{shell}rc', fg="green", bold=True, nl=False)
         click.echo(" to activate the completion permanently.", nl=True)
         click.echo("", nl=True)
     exit(0)
@@ -68,7 +109,6 @@ def cli():
     """
     A Generic Application-Layer Key Generator supporting JWK and PASERK.
     """
-    pass
 
 
 @cli.group("jwk")
@@ -112,13 +152,6 @@ def jwk():
     help="Key id size.",
 )
 @click.option(
-    "--key_size",
-    type=int,
-    default=2048,
-    required=False,
-    help="Key size (MUST be >=512).",
-)
-@click.option(
     "-o",
     "--output_format",
     type=click.Choice(["json", "jwks"]),
@@ -126,32 +159,25 @@ def jwk():
     required=False,
     help="Set output format.",
 )
+@click.option(
+    "--key_size",
+    type=int,
+    default=2048,
+    required=False,
+    help="Key size (MUST be >=512).",
+)
 def jwk_rsa(
     alg: str,
     use: str = "",
     kid: str = "",
     kid_type: str = "none",
     kid_size: int = 32,
-    key_size: int = 2048,
     output_format: str = "json",
+    key_size: int = 2048,
 ):
 
     """Generate RSA JWK."""
-    try:
-        show_result(
-            generate_jwk(
-                "RSA",
-                alg=alg,
-                use=use,
-                kid=kid,
-                kid_type=kid_type,
-                kid_size=kid_size,
-                rsa_key_size=key_size,
-                output_format=output_format,
-            )
-        )
-    except Exception as err:
-        show_error(err)
+    _jwk("RSA", "", alg, use, kid, kid_type, kid_size, output_format, key_size)
     return
 
 
@@ -215,21 +241,7 @@ def jwk_ec(
 ):
 
     """Generate EC JWK."""
-    try:
-        show_result(
-            generate_jwk(
-                "EC",
-                crv=crv,
-                alg=alg,
-                use=use,
-                kid=kid,
-                kid_type=kid_type,
-                kid_size=kid_size,
-                output_format=output_format,
-            )
-        )
-    except Exception as err:
-        show_error(err)
+    _jwk("EC", crv, alg, use, kid, kid_type, kid_size, output_format, 0)
     return
 
 
@@ -293,21 +305,7 @@ def jwk_okp(
 ):
 
     """Generate OKP JWK."""
-    try:
-        show_result(
-            generate_jwk(
-                "OKP",
-                crv=crv,
-                alg=alg,
-                use=use,
-                kid=kid,
-                kid_type=kid_type,
-                kid_size=kid_size,
-                output_format=output_format,
-            )
-        )
-    except Exception as err:
-        show_error(err)
+    _jwk("OKP", crv, alg, use, kid, kid_type, kid_size, output_format, 0)
     return
 
 
@@ -319,7 +317,6 @@ def paserk():
 @paserk.group("v4")
 def v4():
     """Generate PASERK for PASETO v4."""
-    pass
 
 
 @v4.command("public")
@@ -330,10 +327,7 @@ def v4():
     help="Generate key id or not.",
 )
 def paserk_v4_public(kid: bool):
-    try:
-        show_result(generate_public_paserk(4, kid))
-    except Exception as err:
-        show_error(err)
+    _paserk_public(4, kid)
     return
 
 
@@ -351,17 +345,13 @@ def paserk_v4_public(kid: bool):
     help="Generate key id or not.",
 )
 def paserk_v4_local(key_material: str, kid: bool = True):
-    try:
-        show_result(generate_local_paserk(4, key_material, kid))
-    except Exception as err:
-        show_error(err)
+    _paserk_local(4, key_material, kid)
     return
 
 
 @paserk.group("v3")
 def v3():
     """Generate PASERK for PASETO v3."""
-    pass
 
 
 @v3.command("public")
@@ -372,10 +362,7 @@ def v3():
     help="Generate key id or not.",
 )
 def paserk_v3_public(kid: bool):
-    try:
-        show_result(generate_public_paserk(3, kid))
-    except Exception as err:
-        show_error(err)
+    _paserk_public(3, kid)
     return
 
 
@@ -393,17 +380,13 @@ def paserk_v3_public(kid: bool):
     help="Generate key id or not.",
 )
 def paserk_v3_local(key_material: str, kid: bool = True):
-    try:
-        show_result(generate_local_paserk(3, key_material, kid))
-    except Exception as err:
-        show_error(err)
+    _paserk_local(3, key_material, kid)
     return
 
 
 @paserk.group("v2")
 def v2():
     """Generate PASERK for PASETO v2."""
-    pass
 
 
 @v2.command("public")
@@ -414,10 +397,7 @@ def v2():
     help="Generate key id or not.",
 )
 def paserk_v2_public(kid: bool):
-    try:
-        show_result(generate_public_paserk(2, kid))
-    except Exception as err:
-        show_error(err)
+    _paserk_public(2, kid)
     return
 
 
@@ -435,17 +415,13 @@ def paserk_v2_public(kid: bool):
     help="Generate key id or not.",
 )
 def paserk_v2_local(key_material: str, kid: bool = True):
-    try:
-        show_result(generate_local_paserk(2, key_material, kid))
-    except Exception as err:
-        show_error(err)
+    _paserk_local(2, key_material, kid)
     return
 
 
 @paserk.group("v1")
 def v1():
     """Generate PASERK for PASETO v1."""
-    pass
 
 
 @v1.command("public")
@@ -463,10 +439,7 @@ def v1():
     help="Key size (MUST be >=512).",
 )
 def paserk_v1(kid: bool, key_size: int):
-    try:
-        show_result(generate_public_paserk(1, kid, rsa_key_size=key_size))
-    except Exception as err:
-        show_error(err)
+    _paserk_public(1, kid, rsa_key_size=key_size)
     return
 
 
@@ -484,8 +457,5 @@ def paserk_v1(kid: bool, key_size: int):
     help="Generate key id or not.",
 )
 def paserk_v1_local(key_material: str, kid: bool = True):
-    try:
-        show_result(generate_local_paserk(1, key_material, kid))
-    except Exception as err:
-        show_error(err)
+    _paserk_local(1, key_material, kid)
     return
