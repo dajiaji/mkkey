@@ -135,12 +135,12 @@ $ mkkey jwk ec --kid 01 --alg ES256 --use sig
 
 ### Generate a JWK with kid generation method
 
-`kid` can also be generated automatically. In this case, use `--kid_type` to specify the generation method.
+`kid` can also be generated automatically. In this case, use `--kid-type` to specify the generation method.
 For now, only `sha256` (see [kid generation methods for JWK](#kid-generation-methods-for-jwk)) is available.
-You can adjust the size of the auto-generated kid by using `--kid_size` as well:
+You can adjust the size of the auto-generated kid by using `--kid-size` as well:
 
 ```sh
-$ mkkey jwk ec --kid_type sha256 --kid_size 16
+$ mkkey jwk ec --kid-type sha256 --kid-size 16
 {
     "public": {
         "jwk": {
@@ -212,7 +212,7 @@ $ mkkey paserk v4 public --kid
 
 ## kid generation methods for JWK
 
-Following kid generation methods are available that can be specified as `--kid_type` option:
+Following kid generation methods are available that can be specified as `--kid-type` option:
 
 - `sha256`: Use a SHA256 hash value of PEM-formatted public key bytes as a kid value. The PEM format must be subject public key info which starts with `-----BEGIN PUBLIC KEY-----`.
 - `none`: Do not generate kid [default].

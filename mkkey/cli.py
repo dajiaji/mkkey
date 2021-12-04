@@ -139,14 +139,14 @@ def jwk():
     help="Set key id ('kid').",
 )
 @click.option(
-    "--kid_type",
+    "--kid-type",
     type=click.Choice(["none", "sha256"]),
     default="none",
     required=False,
     help="Set auto key id generation method when '--kid' is not used.",
 )
 @click.option(
-    "--kid_size",
+    "--kid-size",
     type=int,
     default=0,
     required=False,
@@ -161,7 +161,7 @@ def jwk():
     help="Set output format.",
 )
 @click.option(
-    "--key_size",
+    "--key-size",
     type=int,
     default=2048,
     show_default=True,
@@ -212,14 +212,14 @@ def jwk_rsa(
     help="Set key id ('kid').",
 )
 @click.option(
-    "--kid_type",
+    "--kid-type",
     type=click.Choice(["none", "sha256"]),
     default="none",
     required=False,
     help="Set auto key id generation method when '--kid' is not used.",
 )
 @click.option(
-    "--kid_size",
+    "--kid-size",
     type=int,
     default=0,
     required=False,
@@ -277,14 +277,14 @@ def jwk_ec(
     help="Set key id ('kid').",
 )
 @click.option(
-    "--kid_type",
+    "--kid-type",
     type=click.Choice(["none", "sha256"]),
     default="none",
     required=False,
     help="Set auto key id generation method when '--kid' is not used.",
 )
 @click.option(
-    "--kid_size",
+    "--kid-size",
     type=int,
     default=0,
     required=False,
@@ -442,7 +442,7 @@ def v1():
     help="Set PASERK ID ('kid') or not.",
 )
 @click.option(
-    "--key_size",
+    "--key-size",
     type=int,
     default=2048,
     show_default=True,
