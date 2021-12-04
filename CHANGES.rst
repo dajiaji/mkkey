@@ -4,6 +4,8 @@ Changes
 Unreleased
 ----------
 
+- Add support for key_ops. `#15 <https://github.com/dajiaji/mkkey/pull/15>`__
+
 Version 0.2.0
 -------------
 
