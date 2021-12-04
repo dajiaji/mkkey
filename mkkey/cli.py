@@ -23,6 +23,7 @@ def _jwk(
     crv: str = "",
     alg: str = "",
     use: str = "",
+    key_ops: bool = False,
     kid: str = "",
     kid_type: str = "none",
     kid_size: int = 0,
@@ -36,6 +37,7 @@ def _jwk(
                 crv=crv,
                 alg=alg,
                 use=use,
+                key_ops=key_ops,
                 kid=kid,
                 kid_type=kid_type,
                 kid_size=kid_size,
@@ -132,6 +134,12 @@ def jwk():
     help="Set public key usage ('use').",
 )
 @click.option(
+    "--key-ops/--no-key-ops",
+    default=False,
+    required=False,
+    help="Set key operations ('key_ops') or not.",
+)
+@click.option(
     "--kid",
     type=str,
     default="",
@@ -171,6 +179,7 @@ def jwk():
 def jwk_rsa(
     alg: str,
     use: str = "",
+    key_ops: bool = False,
     kid: str = "",
     kid_type: str = "none",
     kid_size: int = 0,
@@ -179,7 +188,7 @@ def jwk_rsa(
 ):
 
     """Generate RSA JWK."""
-    _jwk("RSA", "", alg, use, kid, kid_type, kid_size, output_format, key_size)
+    _jwk("RSA", "", alg, use, key_ops, kid, kid_type, kid_size, output_format, key_size)
     return
 
 
@@ -203,6 +212,12 @@ def jwk_rsa(
     type=click.Choice(["sig"]),
     required=False,
     help="Set public key usage ('use').",
+)
+@click.option(
+    "--key-ops/--no-key-ops",
+    default=False,
+    required=False,
+    help="Set key operations ('key_ops') or not.",
 )
 @click.option(
     "--kid",
@@ -237,6 +252,7 @@ def jwk_ec(
     crv: str,
     alg: str = "",
     use: str = "",
+    key_ops: bool = False,
     kid: str = "",
     kid_type: str = "none",
     kid_size: int = 0,
@@ -244,7 +260,7 @@ def jwk_ec(
 ):
 
     """Generate EC JWK."""
-    _jwk("EC", crv, alg, use, kid, kid_type, kid_size, output_format, 0)
+    _jwk("EC", crv, alg, use, key_ops, kid, kid_type, kid_size, output_format, 0)
     return
 
 
@@ -268,6 +284,12 @@ def jwk_ec(
     type=click.Choice(["sig"]),
     required=False,
     help="Set public key usage ('use').",
+)
+@click.option(
+    "--key-ops/--no-key-ops",
+    default=False,
+    required=False,
+    help="Set key operations ('key_ops') or not.",
 )
 @click.option(
     "--kid",
@@ -302,6 +324,7 @@ def jwk_okp(
     crv: str,
     alg: str = "",
     use: str = "",
+    key_ops: bool = False,
     kid: str = "",
     kid_type: str = "none",
     kid_size: int = 0,
@@ -309,7 +332,7 @@ def jwk_okp(
 ):
 
     """Generate OKP JWK."""
-    _jwk("OKP", crv, alg, use, kid, kid_type, kid_size, output_format, 0)
+    _jwk("OKP", crv, alg, use, key_ops, kid, kid_type, kid_size, output_format, 0)
     return
 
 

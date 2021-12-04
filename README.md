@@ -102,10 +102,11 @@ $ mkkey jwk ec --crv P-384
 
 ### Generate a JWK with optional attributes
 
-If you want to include `kid`, `alg` and `use` in the JWK, use the `--kid`, `--alg` and `--use` respectively:
+If you want to include `kid`, `alg`, `use` and `key_ops` in the JWK,
+use the `--kid`, `--alg`, `--use`, and `--key-ops` respectively:
 
 ```sh
-$ mkkey jwk ec --kid 01 --alg ES256 --use sig
+$ mkkey jwk ec --kid 01 --alg ES256 --use sig --key-ops
 {
     "public": {
         "jwk": {
@@ -114,6 +115,7 @@ $ mkkey jwk ec --kid 01 --alg ES256 --use sig
             "crv": "P-256",
             "alg": "ES256",
             "use": "sig",
+            "key_ops": ["verify"],
             "x": "qg-3SA7jNvG7DPF8ajuRR69d5LoBz-I8Xg4ze1kjdHs",
             "y": "JctPLnWOeyJM3apWxyEX3bHDo97kel4gdI8x0FlTwHc"
         }
@@ -125,6 +127,7 @@ $ mkkey jwk ec --kid 01 --alg ES256 --use sig
             "crv": "P-256",
             "alg": "ES256",
             "use": "sig",
+            "key_ops": ["sign"],
             "x": "qg-3SA7jNvG7DPF8ajuRR69d5LoBz-I8Xg4ze1kjdHs",
             "y": "JctPLnWOeyJM3apWxyEX3bHDo97kel4gdI8x0FlTwHc",
             "d": "GZ9ihMNwYYbglWHV8vau-W5gaZal5ajBb_NiY7Ci7Uk"

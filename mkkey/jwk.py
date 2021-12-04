@@ -24,6 +24,7 @@ def generate_jwk(
     crv: str = "",
     alg: str = "",
     use: str = "",
+    key_ops: bool = False,
     kid: str = "",
     kid_type: str = "none",
     kid_size: int = 32,
@@ -57,12 +58,16 @@ def generate_jwk(
         pk["alg"] = alg
         if use:
             pk["use"] = use
+        if key_ops:
+            pk["key_ops"] = ["verify"]
         pk["n"] = to_base64url_uint(pn.n)
         pk["e"] = to_base64url_uint(pn.e)
 
         # secret
         sn = k.private_numbers()
         sk = deepcopy(pk)
+        if key_ops:
+            sk["key_ops"] = ["sign"]
         sk["d"] = to_base64url_uint(sn.d)
         sk["p"] = to_base64url_uint(sn.p)
         sk["q"] = to_base64url_uint(sn.q)
@@ -115,11 +120,15 @@ def generate_jwk(
             pk["alg"] = alg
         if use:
             pk["use"] = use
+        if key_ops:
+            pk["key_ops"] = ["verify"]
         pk["x"] = base64url_encode(k.public_key().public_numbers().x.to_bytes(key_len, byteorder="big"))
         pk["y"] = base64url_encode(k.public_key().public_numbers().y.to_bytes(key_len, byteorder="big"))
 
         # secret
         sk = deepcopy(pk)
+        if key_ops:
+            sk["key_ops"] = ["sign"]
         sk["d"] = base64url_encode(k.private_numbers().private_value.to_bytes(key_len, byteorder="big"))
 
     elif kty == "OKP":
@@ -159,10 +168,14 @@ def generate_jwk(
             pk["alg"] = alg
         if use:
             pk["use"] = use
+        if key_ops:
+            pk["key_ops"] = ["verify"]
         pk["x"] = base64url_encode(x)
 
         # secret
         sk = deepcopy(pk)
+        if key_ops:
+            sk["key_ops"] = ["sign"]
         sk["d"] = base64url_encode(d)
 
     else:
