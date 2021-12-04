@@ -6,9 +6,26 @@
 [![codecov](https://codecov.io/gh/dajiaji/mkkey/branch/main/graph/badge.svg?token=QN8GXEYEP3)](https://codecov.io/gh/dajiaji/mkkey)
 
 mkkey is a CLI tool for generating following application-layer keys:
-- [JWK (JSON Web Key) - RFC7517](https://datatracker.ietf.org/doc/html/rfc7517)
+- [RFC7517 - JWK (JSON Web Key)](https://datatracker.ietf.org/doc/html/rfc7517)
 - [PASERK (Platform-Agnositc Serialized Keys)](https://github.com/paseto-standard/paserk)
 
+In the past, it was necessary to use `openssl` command to create a PEM-formatted key pair,
+and then read the PEM-formatted key and convert it into a JWK. However, by using `mkkey`,
+you can directly and easily create JWKs and PASERKs that can be used in applications
+without generating intermediate data (PEM-formatted keys) as follows:
+
+![mkkey](https://github.com/dajiaji/mkkey/wiki/images/mkkey_header.png)
+
+
+## Index
+
+- [Installation](#installation)
+- [Basic Usage](#basic-usage)
+  - [JWK (JSON Web Key)](#jwk-json-web-key)
+  - [PASERK (Platform-Agnostic Serialized Keys)](#paserk-platform-agnostic-serialized-keys)
+- [Contributing](#contributing)
+
+## Installation
 
 You can install mkkey with pip:
 
@@ -16,10 +33,10 @@ You can install mkkey with pip:
 $ pip install mkkey
 ```
 
-And then, you can use it as follows.
+## Basic Usage
 
 
-For JWK:
+### JWK (JSON Web Key)
 
 ```sh
 $ mkkey jwk ec
@@ -44,7 +61,14 @@ $ mkkey jwk ec
 }
 ```
 
-For PASERK:
+See help for details:
+
+```sh
+$ mkkey jwk --help
+```
+
+### PASERK (Platform-Agnostic Serialized Keys)
+
 
 ```sh
 $ mkkey paserk v4 public
@@ -62,7 +86,9 @@ $ mkkey paserk v4 public
 See help for details:
 
 ```sh
-$ mkkey --help
-$ mkkey jwk --help
 $ mkkey paserk --help
 ```
+
+## Contributing
+
+We welcome all kind of contributions, filing issues, suggesting new features or sending PRs.
