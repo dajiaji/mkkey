@@ -27,7 +27,7 @@ without generating intermediate keys (PEM-formatted keys):
       - [Generate a JWK with kid generation method](#generate-a-jwk-with-kid-generation-method)
   - [PASERK (Platform-Agnostic Serialized Keys)](#paserk-platform-agnostic-serialized-keys)
       - [Generate a PASERK](#generate-a-paserk)
-      - [Generate a PASERK along with a PASERK ID](#generate-a-paserk-with-a-paserk-id)
+      - [Generate a PASERK along with a PASERK ID](#generate-a-paserk-along-with-a-paserk-id)
 - [kid generation methods for JWK](#kid-generation-methods-for-jwk)
 - [Contributing](#contributing)
 
