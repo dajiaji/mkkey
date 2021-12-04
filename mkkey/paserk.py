@@ -29,23 +29,23 @@ def generate_public_paserk(version: int, kid: bool, rsa_key_size: int = 2048) ->
         serialization.Encoding.PEM,
         serialization.PublicFormat.SubjectPublicKeyInfo,
     )
-    res: dict = {}
+    res: dict = {"public": {}, "secret": {}}
     pk = Key.new(version, "public", pub_pem)
-    res["public"] = {"paserk": pk.to_paserk()}
     sk = Key.new(version, "public", priv_pem)
-    res["secret"] = {"paserk": sk.to_paserk()}
     if kid:
         res["public"]["kid"] = pk.to_paserk_id()
         res["secret"]["kid"] = sk.to_paserk_id()
+    res["public"]["paserk"] = pk.to_paserk()
+    res["secret"]["paserk"] = sk.to_paserk()
     return res
 
 
 def generate_local_paserk(version: int, key_material: Union[str, bytes], kid: bool) -> dict:
-    res: dict = {}
+    res: dict = {"secret": {}}
     if not key_material:
         key_material = token_bytes(32)
     sk = Key.new(version, "local", key_material)
-    res["secret"] = {"paserk": sk.to_paserk()}
     if kid:
         res["secret"]["kid"] = sk.to_paserk_id()
+    res["secret"]["paserk"] = sk.to_paserk()
     return res
