@@ -4,6 +4,8 @@ Changes
 Unreleased
 ----------
 
+- Use DER format for "sha256" kid generation method. `#19 <https://github.com/dajiaji/mkkey/pull/19>`__
+
 Version 0.3.0
 -------------
 

@@ -43,7 +43,7 @@ def generate_jwk(
             if kid_type == "sha256":
                 pk["kid"] = _generate_kid(
                     k.public_key().public_bytes(
-                        serialization.Encoding.PEM,
+                        serialization.Encoding.DER,
                         serialization.PublicFormat.SubjectPublicKeyInfo,
                     ),
                     hashlib.sha256,
@@ -104,7 +104,7 @@ def generate_jwk(
             if kid_type == "sha256":
                 pk["kid"] = _generate_kid(
                     k.public_key().public_bytes(
-                        serialization.Encoding.PEM,
+                        serialization.Encoding.DER,
                         serialization.PublicFormat.SubjectPublicKeyInfo,
                     ),
                     hashlib.sha256,
@@ -143,7 +143,7 @@ def generate_jwk(
             if kid_type == "sha256":
                 pk["kid"] = _generate_kid(
                     k.public_key().public_bytes(
-                        serialization.Encoding.PEM,
+                        serialization.Encoding.DER,
                         serialization.PublicFormat.SubjectPublicKeyInfo,
                     ),
                     hashlib.sha256,
