@@ -217,7 +217,7 @@ $ mkkey paserk v4 public --kid
 
 Following kid generation methods are available that can be specified as `--kid-type` option:
 
-- `sha256`: Use a SHA256 hash value of DER-formatted public key bytes as a kid value. The DER format must be SubjectPublicKeyInfo which is the typical public key format which consists of an algorithm identifier and the public key as bytes..
+- `sha256`: Use a SHA256 hash value of DER formatted public key as a kid value. The DER format must be SubjectPublicKeyInfo which is the typical public key format and consists of an algorithm identifier and the public key bytes.
 - `none`: Do not generate kid [default].
 
 ## Contributing
