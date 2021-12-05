@@ -9,6 +9,7 @@ Version 0.4.0
 
 Released 2021-12-05
 
+- Add __main__.py. `#20 <https://github.com/dajiaji/mkkey/pull/20>`__
 - Use DER format for "sha256" kid generation method. `#19 <https://github.com/dajiaji/mkkey/pull/19>`__
 
 Version 0.3.0
