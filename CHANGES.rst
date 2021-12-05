@@ -4,6 +4,7 @@ Changes
 Unreleased
 ----------
 
+- Add test with external jose library. `#16 <https://github.com/dajiaji/mkkey/pull/16>`__
 - Add support for key_ops. `#15 <https://github.com/dajiaji/mkkey/pull/15>`__
 
 Version 0.2.0

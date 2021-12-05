@@ -34,6 +34,7 @@ coverage = {extras = ["toml"], version = "^6.2"}
 tox = "^3.24.4"
 pre-commit = "^2.15.0"
 mypy = "^0.910"
+PyJWT = "^2.3.0"
 
 [tool.poetry.scripts]
 mkkey = "mkkey.cli:cli"

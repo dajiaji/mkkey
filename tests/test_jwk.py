@@ -1,4 +1,5 @@
 import pytest
+from jwt import PyJWK
 
 from mkkey.jwk import generate_jwk
 
@@ -46,11 +47,14 @@ def test_generate_jwk(kty, crv, alg, use, key_ops, kid, kid_type, kid_size, outp
     res = generate_jwk(kty, crv, alg, use, key_ops, kid, kid_type, kid_size, output_format, rsa_key_size)
     assert "secret" in res
     assert "public" in res
+    jwk_dict: dict
     if output_format == "json":
         assert "jwk" in res["secret"]
         assert "kty" in res["secret"]["jwk"]
         assert "jwk" in res["public"]
         assert "kty" in res["public"]["jwk"]
+        pub_dict = res["public"]["jwk"]
+        priv_dict = res["secret"]["jwk"]
 
     elif output_format == "jwks":
         assert "jwks" in res["secret"]
@@ -61,9 +65,38 @@ def test_generate_jwk(kty, crv, alg, use, key_ops, kid, kid_type, kid_size, outp
         assert "keys" in res["public"]["jwks"]
         assert isinstance(res["public"]["jwks"]["keys"], list)
         assert len(res["public"]["jwks"]["keys"]) == 1
+        pub_dict = res["public"]["jwks"]["keys"][0]
+        priv_dict = res["secret"]["jwks"]["keys"][0]
 
     else:
         pytest.fail("Invalid test argument.")
+
+    # For mitigating the bug on PyJWT(<=2.3.0)
+    if "crv" in pub_dict and pub_dict["crv"] == "Ed448":
+        pub_dict["alg"] = priv_dict["alg"] = "EdDSA"
+
+    try:
+        pub = PyJWK.from_dict(pub_dict)
+        priv = PyJWK.from_dict(priv_dict)
+    except Exception as err:
+        pytest.fail(f"PyJWK.from_dict() must not fail: {err}.")
+
+    assert pub.key_type == pub_dict["kty"]
+    if kid or kid_type != "none":
+        assert pub.key_id == pub_dict["kid"]
+    if use:
+        assert pub.public_key_use == pub_dict["use"]
+    assert priv.key_type == priv_dict["kty"]
+    if kid or kid_type != "none":
+        assert priv.key_id == priv_dict["kid"]
+    if use:
+        assert priv.public_key_use == priv_dict["use"]
+
+    try:
+        signature = priv.Algorithm.sign(b"Hello world!", priv.key)
+        assert pub.Algorithm.verify(b"Hello world!", pub.key, signature)
+    except Exception as err:
+        pytest.fail(f"jwt.encode()/decode() must not fail: {err}.")
 
 
 @pytest.mark.parametrize(
