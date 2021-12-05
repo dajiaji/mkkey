@@ -217,7 +217,7 @@ $ mkkey paserk v4 public --kid
 
 Following kid generation methods are available that can be specified as `--kid-type` option:
 
-- `sha256`: Use a SHA256 hash value of PEM-formatted public key bytes as a kid value. The PEM format must be subject public key info which starts with `-----BEGIN PUBLIC KEY-----`.
+- `sha256`: Use a SHA256 hash value of PEM-formatted public key bytes as a kid value. The PEM format must be subject public key info which starts with `-----BEGIN PUBLIC KEY-----` and the hash value must be base64 URL encoded.
 - `none`: Do not generate kid [default].
 
 ## Contributing
