@@ -49,16 +49,16 @@ def _jwk(
     return
 
 
-def _paserk_public(version: int, kid: bool, rsa_key_size: int = 2048):
+def _paserk_public(version: int, kid: bool, password: str, rsa_key_size: int = 2048):
     try:
-        _show_result(generate_public_paserk(version, kid, rsa_key_size=rsa_key_size))
+        _show_result(generate_public_paserk(version, kid, password, rsa_key_size=rsa_key_size))
     except Exception as err:
         _show_error(err)
 
 
-def _paserk_local(version: int, key_material: str, kid: bool):
+def _paserk_local(version: int, key_material: str, kid: bool, password: str):
     try:
-        _show_result(generate_local_paserk(version, key_material, kid))
+        _show_result(generate_local_paserk(version, key_material, kid, password))
     except Exception as err:
         _show_error(err)
 
@@ -353,9 +353,16 @@ def v4():
     required=False,
     help="Set PASERK ID ('kid') or not.",
 )
-def paserk_v4_public(kid: bool):
+@click.option(
+    "--password",
+    type=str,
+    default="",
+    required=False,
+    help="Set password for key wrapping.",
+)
+def paserk_v4_public(kid: bool, password: str):
     """Generate v4.public PASERK for Asymmetric-key digital signatures."""
-    _paserk_public(4, kid)
+    _paserk_public(4, kid, password)
     return
 
 
@@ -372,9 +379,16 @@ def paserk_v4_public(kid: bool):
     required=False,
     help="Set PASERK ID ('kid') or not.",
 )
-def paserk_v4_local(key_material: str, kid: bool = True):
+@click.option(
+    "--password",
+    type=str,
+    default="",
+    required=False,
+    help="Set password for key wrapping.",
+)
+def paserk_v4_local(key_material: str, kid: bool, password: str):
     """Generate v4.local PASERK for Symmetric-key encryption (AEAD)."""
-    _paserk_local(4, key_material, kid)
+    _paserk_local(4, key_material, kid, password)
     return
 
 
@@ -390,9 +404,16 @@ def v3():
     required=False,
     help="Set PASERK ID ('kid') or not.",
 )
-def paserk_v3_public(kid: bool):
+@click.option(
+    "--password",
+    type=str,
+    default="",
+    required=False,
+    help="Set password for key wrapping.",
+)
+def paserk_v3_public(kid: bool, password: str):
     """Generate v3.public PASERK for Asymmetric-key digital signatures."""
-    _paserk_public(3, kid)
+    _paserk_public(3, kid, password)
     return
 
 
@@ -409,9 +430,16 @@ def paserk_v3_public(kid: bool):
     required=False,
     help="Set PASERK ID ('kid') or not.",
 )
-def paserk_v3_local(key_material: str, kid: bool = True):
+@click.option(
+    "--password",
+    type=str,
+    default="",
+    required=False,
+    help="Set password for key wrapping.",
+)
+def paserk_v3_local(key_material: str, kid: bool, password: str):
     """Generate v3.local PASERK for Symmetric-key encryption (AEAD)."""
-    _paserk_local(3, key_material, kid)
+    _paserk_local(3, key_material, kid, password)
     return
 
 
@@ -427,9 +455,16 @@ def v2():
     required=False,
     help="Set PASERK ID ('kid') or not.",
 )
-def paserk_v2_public(kid: bool):
+@click.option(
+    "--password",
+    type=str,
+    default="",
+    required=False,
+    help="Set password for key wrapping.",
+)
+def paserk_v2_public(kid: bool, password: str):
     """Generate v2.public PASERK for Asymmetric-key digital signatures."""
-    _paserk_public(2, kid)
+    _paserk_public(2, kid, password)
     return
 
 
@@ -446,9 +481,16 @@ def paserk_v2_public(kid: bool):
     required=False,
     help="Set PASERK ID ('kid') or not.",
 )
-def paserk_v2_local(key_material: str, kid: bool = True):
+@click.option(
+    "--password",
+    type=str,
+    default="",
+    required=False,
+    help="Set password for key wrapping.",
+)
+def paserk_v2_local(key_material: str, kid: bool, password: str):
     """Generate v2.local PASERK for Symmetric-key encryption (AEAD)."""
-    _paserk_local(2, key_material, kid)
+    _paserk_local(2, key_material, kid, password)
     return
 
 
@@ -465,6 +507,13 @@ def v1():
     help="Set PASERK ID ('kid') or not.",
 )
 @click.option(
+    "--password",
+    type=str,
+    default="",
+    required=False,
+    help="Set password for key wrapping.",
+)
+@click.option(
     "--key-size",
     type=int,
     default=2048,
@@ -472,9 +521,9 @@ def v1():
     required=False,
     help="Set the length of modulus in bits for RSA key (MUST be >=512).",
 )
-def paserk_v1(kid: bool, key_size: int):
+def paserk_v1(kid: bool, password: str, key_size: int):
     """Generate v1.public PASERK for Asymmetric-key digital signatures."""
-    _paserk_public(1, kid, rsa_key_size=key_size)
+    _paserk_public(1, kid, password, rsa_key_size=key_size)
     return
 
 
@@ -491,7 +540,14 @@ def paserk_v1(kid: bool, key_size: int):
     required=False,
     help="Generate key id or not.",
 )
-def paserk_v1_local(key_material: str, kid: bool = True):
+@click.option(
+    "--password",
+    type=str,
+    default="",
+    required=False,
+    help="Set password for key wrapping.",
+)
+def paserk_v1_local(key_material: str, kid: bool, password: str):
     """Generate v1.local PASERK for Symmetric-key encryption (AEAD)."""
-    _paserk_local(1, key_material, kid)
+    _paserk_local(1, key_material, kid, password)
     return
