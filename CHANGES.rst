@@ -4,6 +4,11 @@ Changes
 Unreleased
 ----------
 
+Version 0.5.0
+-------------
+
+Released 2021-12-06
+
 - Add support for PASERK password-based key wrapping. `#22 <https://github.com/dajiaji/mkkey/pull/22>`__
 
 Version 0.4.0
