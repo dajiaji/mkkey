@@ -7,7 +7,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from pyseto import Key
 
 
-def generate_public_paserk(version: int, kid: bool, rsa_key_size: int = 2048) -> dict:
+def generate_public_paserk(version: int, kid: bool, password: str, rsa_key_size: int = 2048) -> dict:
 
     k: Any
     if version == 1:
@@ -36,16 +36,16 @@ def generate_public_paserk(version: int, kid: bool, rsa_key_size: int = 2048) ->
         res["public"]["kid"] = pk.to_paserk_id()
         res["secret"]["kid"] = sk.to_paserk_id()
     res["public"]["paserk"] = pk.to_paserk()
-    res["secret"]["paserk"] = sk.to_paserk()
+    res["secret"]["paserk"] = sk.to_paserk(password=password)
     return res
 
 
-def generate_local_paserk(version: int, key_material: Union[str, bytes], kid: bool) -> dict:
+def generate_local_paserk(version: int, key_material: Union[str, bytes], kid: bool, password: str = "") -> dict:
     res: dict = {"secret": {}}
     if not key_material:
         key_material = token_bytes(32)
     sk = Key.new(version, "local", key_material)
     if kid:
         res["secret"]["kid"] = sk.to_paserk_id()
-    res["secret"]["paserk"] = sk.to_paserk()
+    res["secret"]["paserk"] = sk.to_paserk(password=password)
     return res
