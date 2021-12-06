@@ -69,6 +69,10 @@ def test_jwk(args):
         ["v2", "public", "--kid"],
         ["v3", "public", "--kid"],
         ["v4", "public", "--kid"],
+        ["v1", "public", "--password", "mysecret"],
+        ["v2", "public", "--password", "mysecret"],
+        ["v3", "public", "--password", "mysecret"],
+        ["v4", "public", "--password", "mysecret"],
         ["v1", "local"],
         ["v2", "local"],
         ["v3", "local"],
@@ -77,6 +81,10 @@ def test_jwk(args):
         ["v2", "local", "--kid"],
         ["v3", "local", "--kid"],
         ["v4", "local", "--kid"],
+        ["v1", "local", "--password", "mysecret"],
+        ["v2", "local", "--password", "mysecret"],
+        ["v3", "local", "--password", "mysecret"],
+        ["v4", "local", "--password", "mysecret"],
     ],
 )
 def test_paserk(args):
