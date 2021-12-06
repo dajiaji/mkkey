@@ -41,6 +41,7 @@ def test_generate_public_paserk(version, kid, password, rsa_key_size):
         (0, False, "", 0, "Invalid version: 0."),
         (-1, False, "", 0, "Invalid version: -1."),
         (100, False, "", 0, "Invalid version: 100."),
+        (1, False, "", 256, "key_size must be at least 512-bits."),
     ],
 )
 def test_generate_public_paserk_with_invalid_arg(version, kid, password, rsa_key_size, msg):
