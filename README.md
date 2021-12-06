@@ -28,6 +28,7 @@ without generating intermediate keys (PEM-formatted keys):
   - [PASERK (Platform-Agnostic Serialized Keys)](#paserk-platform-agnostic-serialized-keys)
       - [Generate a PASERK](#generate-a-paserk)
       - [Generate a PASERK along with a PASERK ID](#generate-a-paserk-along-with-a-paserk-id)
+      - [Generate a PASERK wrapped using password-based encryption](#generate-a-paserk-wrapped-using-password-based-encryption)
 - [kid generation methods for JWK](#kid-generation-methods-for-jwk)
 - [Contributing](#contributing)
 
@@ -209,6 +210,22 @@ $ mkkey paserk v4 public --kid
     "secret": {
         "kid": "k4.sid.v1091k4VuZOEKfIO5hLByGwK-RP6dFhfaltURc4CFkUd",
         "paserk": "k4.secret.0h5Q2HDR8PbFMZhN8z7iXbbCyn5-bRQdNPRYIglvnWdCjuKkqkRrZHEKqZVdKkd1FtYwa2D1Cx6wxRstB9T8_A"
+    }
+}
+```
+
+### Generate a PASERK wrapped using password-based encryption
+
+If you want to wrap a secret PASERK with password-based encryption, use the `--password` option:
+
+```sh
+$ mkkey paserk v4 public --password mysecretpassword
+{
+    "public": {
+        "paserk": "k4.public.qRUKsDFUDgi0zKuvax9fIEmaeRjyVdLqRMDli0YTDC0"
+    },
+    "secret": {
+        "paserk": "k4.secret-pw.62BwtRDohBqFGR-ohJau2AAAAAAA8AAAAAAAAgAAAAHToEnMr1aNWaJsfwxfjHiZkVqdfn8cuMqIburaesjyt7Un-UKE3Umdi3T2YnrNjoie_BGCFguNk_Q2C7qpKC6nehvr6oM3p-4BzrfZLzmKX7jqfgZlC9xZHe0NFfH5DphWqVfPZ5hoUv8gCYKhz7vZ1lyXNgbuCFI"
     }
 }
 ```
