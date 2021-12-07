@@ -4,6 +4,8 @@ Changes
 Unreleased
 ----------
 
+- Add support for PASERK key wrapping with symmetric key. `#25 <https://github.com/dajiaji/mkkey/pull/25>`__
+
 Version 0.5.0
 -------------
 

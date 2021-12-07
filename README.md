@@ -29,6 +29,7 @@ without generating intermediate keys (PEM-formatted keys):
       - [Generate a PASERK](#generate-a-paserk)
       - [Generate a PASERK along with a PASERK ID](#generate-a-paserk-along-with-a-paserk-id)
       - [Generate a PASERK wrapped using password-based encryption](#generate-a-paserk-wrapped-using-password-based-encryption)
+      - [Generate a PASERK wrapped by another symmetric key](#generate-a-paserk-wrapped-by-another-symmetric-key)
 - [kid generation methods for JWK](#kid-generation-methods-for-jwk)
 - [Contributing](#contributing)
 
@@ -226,6 +227,22 @@ $ mkkey paserk v4 public --password mysecretpassword
     },
     "secret": {
         "paserk": "k4.secret-pw.62BwtRDohBqFGR-ohJau2AAAAAAA8AAAAAAAAgAAAAHToEnMr1aNWaJsfwxfjHiZkVqdfn8cuMqIburaesjyt7Un-UKE3Umdi3T2YnrNjoie_BGCFguNk_Q2C7qpKC6nehvr6oM3p-4BzrfZLzmKX7jqfgZlC9xZHe0NFfH5DphWqVfPZ5hoUv8gCYKhz7vZ1lyXNgbuCFI"
+    }
+}
+```
+
+### Generate a PASERK wrapped by another symmetric key
+
+If you want to wrap a secret PASERK by another symmetric key, use the `--wrapping-key` option:
+
+```sh
+$ mkkey paserk v4 public --wrapping-key 123456789abcdefghi
+{
+    "public": {
+        "paserk": "k4.public.Dpdjm_Dd_4t7lzePcWkFLTPBQSBRwB-XZIJnpGbQcf0"
+    },
+    "secret": {
+        "paserk": "k4.secret-wrap.pie.aIbROal8a-FxyTddcC8cny98i-1IuZ5UrwBD64AZDt8b6_9z0DidT7KVKoyK9mTGwtTSSUFtRT9BYdkUc4kZJy0zio12KSw3hwkLqzYPtgUtxBqwlCIb9D2ug-2eaJw67iv1sNV4ovQsutSumob-po6Bt0IwoFXX0bDOVWHHqV8"
     }
 }
 ```
