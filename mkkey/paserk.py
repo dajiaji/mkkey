@@ -7,7 +7,16 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from pyseto import Key
 
 
-def generate_public_paserk(version: int, kid: bool, password: str, rsa_key_size: int = 2048) -> dict:
+def generate_public_paserk(
+    version: int,
+    kid: bool,
+    password: str,
+    wrapping_key: str,
+    rsa_key_size: int = 2048,
+) -> dict:
+
+    if password and wrapping_key:
+        raise ValueError("Only one of password or wrapping_key must be specified.")
 
     k: Any
     if version == 1:
@@ -36,16 +45,26 @@ def generate_public_paserk(version: int, kid: bool, password: str, rsa_key_size:
         res["public"]["kid"] = pk.to_paserk_id()
         res["secret"]["kid"] = sk.to_paserk_id()
     res["public"]["paserk"] = pk.to_paserk()
-    res["secret"]["paserk"] = sk.to_paserk(password=password)
+    res["secret"]["paserk"] = sk.to_paserk(password=password, wrapping_key=wrapping_key)
     return res
 
 
-def generate_local_paserk(version: int, key_material: Union[str, bytes], kid: bool, password: str = "") -> dict:
-    res: dict = {"secret": {}}
+def generate_local_paserk(
+    version: int,
+    key_material: Union[str, bytes],
+    kid: bool,
+    password: str = "",
+    wrapping_key: str = "",
+) -> dict:
+
+    if password and wrapping_key:
+        raise ValueError("Only one of password or wrapping_key must be specified.")
     if not key_material:
         key_material = token_bytes(32)
+
+    res: dict = {"secret": {}}
     sk = Key.new(version, "local", key_material)
     if kid:
         res["secret"]["kid"] = sk.to_paserk_id()
-    res["secret"]["paserk"] = sk.to_paserk(password=password)
+    res["secret"]["paserk"] = sk.to_paserk(password=password, wrapping_key=wrapping_key)
     return res
