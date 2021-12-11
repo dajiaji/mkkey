@@ -1,4 +1,4 @@
-# mkkey - An Application-Layer Key Generator supporting JWK and PASERK.
+# mkkey - Application-Layer Key (JWK/PASERK) Generator
 
 [![PyPI version](https://badge.fury.io/py/mkkey.svg)](https://badge.fury.io/py/mkkey)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mkkey)
