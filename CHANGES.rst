@@ -4,6 +4,13 @@ Changes
 Unreleased
 ----------
 
+Version 0.6.1
+-------------
+
+Released 2021-12-12
+
+- Fix tab completion instruction for fish. `#29 <https://github.com/dajiaji/mkkey/pull/29>`__
+
 Version 0.6.0
 -------------
 
