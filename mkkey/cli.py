@@ -63,20 +63,7 @@ def _paserk_local(version: int, key_material: str, kid: bool, password: str, wra
         _show_error(err)
 
 
-def install_callback(ctx, attr, value):
-    if not value or ctx.resilient_parsing:
-        return value
-
-    try:
-        shell, path = install()
-    except InstallCompletionError as err:
-        click.secho(
-            f"ERROR: {err.shell} is not supported. bash, zsh, and fish are only supported.",
-            fg="red",
-            nl=True,
-        )
-        exit(1)
-
+def _display_instruction(shell: str, path: str):
     click.echo(f"{shell} completion installed in ", nl=False)
     click.secho(f"{path}", fg="cyan", bold=True, nl=False)
     click.echo(".", nl=True)
@@ -91,6 +78,30 @@ def install_callback(ctx, attr, value):
         click.secho(f'echo -e ". {path}" >> ~/.{shell}rc', fg="cyan", bold=True, nl=False)
         click.echo(" to activate the completion permanently.", nl=True)
         click.echo("", nl=True)
+    if shell == "fish":
+        click.echo("If you see an error log, run ", nl=False)
+        click.secho("mkdir -p ~/.config/fish/completions", fg="cyan", bold=True, nl=True)
+        click.echo("and then run ", nl=False)
+        click.secho("mkkey --install ", fg="cyan", bold=True, nl=False)
+        click.echo("again.", nl=True)
+    return
+
+
+def install_callback(ctx, attr, value):
+    if not value or ctx.resilient_parsing:
+        return value
+
+    try:
+        shell, path = install()
+    except InstallCompletionError as err:
+        click.secho(
+            f"ERROR: {err.shell} is not supported. bash, zsh, and fish are only supported.",
+            fg="red",
+            nl=True,
+        )
+        exit(1)
+
+    _display_instruction(shell, path)
     exit(0)
 
 
