@@ -3,9 +3,24 @@ import json
 import pytest
 from click.testing import CliRunner
 
-from mkkey.cli import cli, jwk, paserk
+from mkkey.cli import _display_instruction, cli, jwk, paserk
 
 runner = CliRunner()
+
+
+@pytest.mark.parametrize(
+    "shell, path",
+    [
+        ("bash", "./"),
+        ("zsh", "./"),
+        ("fish", "./"),
+    ],
+)
+def test_cli__display_instruction(shell, path):
+    try:
+        _display_instruction(shell, path)
+    except Exception as err:
+        pytest.fail(f"_display_instruction() must not fail: {err}")
 
 
 def test_cli_install():
