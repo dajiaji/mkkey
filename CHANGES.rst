@@ -4,6 +4,22 @@ Changes
 Unreleased
 ----------
 
+Version 0.6.2
+-------------
+
+Released 2022-08-11
+
+- Update dependencies.
+    - Bump cryptography to >=36,<38. `#43 <https://github.com/dajiaji/pyseto/pull/43>`__
+- Update dev dependencies.
+    - Bump pre-commit/flake8 to 5.0.4. `#51 <https://github.com/dajiaji/mkkey/pull/51>`__
+    - Bump mypy to 0.971. `#49 <https://github.com/dajiaji/mkkey/pull/49>`__
+    - Bump pre-commit/black to 22.6.0. `#48 <https://github.com/dajiaji/mkkey/pull/48>`__
+    - Bump tox to 3.25.1. `#58 <https://github.com/dajiaji/mkkey/pull/58>`__
+    - Bump pre-commit/pre-commit-hooks to 4.3.0. `#47 <https://github.com/dajiaji/mkkey/pull/47>`__
+    - Bump pytest to ^7.0. `#37 <https://github.com/dajiaji/mkkey/pull/37>`__
+    - Bump pre-commit/blacken-docs to 1.12.0. `#36 <https://github.com/dajiaji/mkkey/pull/36>`__
+
 Version 0.6.1
 -------------
 

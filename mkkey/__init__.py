@@ -1,6 +1,6 @@
 from .cli import cli
 
-__version__ = "0.6.1"
+__version__ = "0.6.2"
 __description__ = "Application-Layer Key (JWK/PASERK) Generator"
 __url__ = "https://github.com/dajiaji/mkkey"
 __uri__ = __url__
