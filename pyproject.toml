@@ -21,7 +21,7 @@ include = [
 
 [tool.poetry.dependencies]
 python = "^3.6.2"
-cryptography = ">=36,<40"
+cryptography = ">=36,<41"
 pyseto = "^1.5.0"
 click = "^8.0.3"
 shellingham = "^1.4.0"
