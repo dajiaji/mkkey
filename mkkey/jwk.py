@@ -31,7 +31,6 @@ def generate_jwk(
     output_format: str = "json",
     rsa_key_size: int = 2048,
 ) -> dict:
-
     k: Any
     res: dict = {}
     pk: dict = {} if not kid else {"kid": kid}

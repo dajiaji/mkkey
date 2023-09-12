@@ -43,7 +43,6 @@ from mkkey.jwk import generate_jwk
     ],
 )
 def test_generate_jwk(kty, crv, alg, use, key_ops, kid, kid_type, kid_size, output_format, rsa_key_size):
-
     res = generate_jwk(kty, crv, alg, use, key_ops, kid, kid_type, kid_size, output_format, rsa_key_size)
     assert "secret" in res
     assert "public" in res
@@ -118,7 +117,6 @@ def test_generate_jwk(kty, crv, alg, use, key_ops, kid, kid_type, kid_size, outp
     ],
 )
 def test_generate_jwk_with_invalid_arg(kty, crv, alg, use, kid, kid_type, kid_size, output_format, rsa_key_size, msg):
-
     with pytest.raises(ValueError) as err:
         generate_jwk(kty, crv, alg, use, False, kid, kid_type, kid_size, output_format, rsa_key_size)
         pytest.fail("generate_jwk() must fail.")

@@ -24,7 +24,6 @@ def test_cli__display_instruction(shell, path):
 
 
 def test_cli_install():
-
     res = runner.invoke(cli, ["--install"])
     assert res.exit_code in [0, 1]
     if res.exit_code == 0:
@@ -32,14 +31,12 @@ def test_cli_install():
 
 
 def test_cli_help():
-
     res = runner.invoke(cli, ["--help"])
     assert res.exit_code == 0
     assert "Usage: cli [OPTIONS] COMMAND [ARGS]..." in res.output
 
 
 def test_cli_version():
-
     res = runner.invoke(cli, ["--version"])
     assert res.exit_code == 0
     assert "cli, version" in res.output
@@ -65,7 +62,6 @@ def test_cli_version():
     ],
 )
 def test_jwk(args):
-
     res = runner.invoke(jwk, args)
     assert res.exit_code == 0
     k = json.loads(res.output)
@@ -111,7 +107,6 @@ def test_jwk(args):
     ],
 )
 def test_paserk(args):
-
     res = runner.invoke(paserk, args)
     assert res.exit_code == 0
     k = json.loads(res.output)
@@ -127,7 +122,6 @@ def test_paserk(args):
     ],
 )
 def test_jwk_with_invalid_args(args, msg):
-
     res = runner.invoke(jwk, args)
     assert res.exit_code == 0
     assert msg in res.output
@@ -140,7 +134,6 @@ def test_jwk_with_invalid_args(args, msg):
     ],
 )
 def test_jwk_with_invalid_args_handled_by_click(args, msg):
-
     res = runner.invoke(jwk, args)
     assert res.exit_code == 2
     assert msg in res.output
@@ -154,7 +147,6 @@ def test_jwk_with_invalid_args_handled_by_click(args, msg):
     ],
 )
 def test_paserk_with_invalid_args(args, msg):
-
     res = runner.invoke(paserk, args)
     assert res.exit_code == 0
     assert msg in res.output
