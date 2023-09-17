@@ -35,7 +35,6 @@ from mkkey.paserk import generate_local_paserk, generate_public_paserk
     ],
 )
 def test_generate_public_paserk(version, kid, password, wrapping_key, rsa_key_size):
-
     res = generate_public_paserk(version, kid, password, wrapping_key, rsa_key_size)
     assert "secret" in res
     assert "public" in res
@@ -54,7 +53,6 @@ def test_generate_public_paserk(version, kid, password, wrapping_key, rsa_key_si
     ],
 )
 def test_generate_public_paserk_with_invalid_arg(version, kid, password, wrapping_key, rsa_key_size, msg):
-
     with pytest.raises(ValueError) as err:
         generate_public_paserk(version, kid, password, wrapping_key, rsa_key_size)
         pytest.fail("generate_public_paserk() must fail.")
@@ -87,7 +85,6 @@ def test_generate_public_paserk_with_invalid_arg(version, kid, password, wrappin
     ],
 )
 def test_generate_local_paserk(version, key_material, kid, password, wrapping_key):
-
     res = generate_local_paserk(version, key_material, kid, password, wrapping_key)
     assert "secret" in res
     if kid:
@@ -102,7 +99,6 @@ def test_generate_local_paserk(version, key_material, kid, password, wrapping_ke
     ],
 )
 def test_generate_local_paserk_with_invalid_arg(version, key_material, kid, password, wrapping_key, msg):
-
     with pytest.raises(ValueError) as err:
         generate_local_paserk(version, key_material, kid, password, wrapping_key)
         pytest.fail("generate_local_paserk() must fail.")
