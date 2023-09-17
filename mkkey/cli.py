@@ -197,7 +197,6 @@ def jwk_rsa(
     output_format: str = "json",
     key_size: int = 2048,
 ):
-
     """Generate RSA JWK."""
     _jwk("RSA", "", alg, use, key_ops, kid, kid_type, kid_size, output_format, key_size)
     return
@@ -269,7 +268,6 @@ def jwk_ec(
     kid_size: int = 0,
     output_format: str = "json",
 ):
-
     """Generate EC JWK."""
     _jwk("EC", crv, alg, use, key_ops, kid, kid_type, kid_size, output_format, 0)
     return
@@ -341,7 +339,6 @@ def jwk_okp(
     kid_size: int = 0,
     output_format: str = "json",
 ):
-
     """Generate OKP JWK."""
     _jwk("OKP", crv, alg, use, key_ops, kid, kid_type, kid_size, output_format, 0)
     return

@@ -14,7 +14,6 @@ def generate_public_paserk(
     wrapping_key: str,
     rsa_key_size: int = 2048,
 ) -> dict:
-
     if password and wrapping_key:
         raise ValueError("Only one of password or wrapping_key must be specified.")
 
@@ -56,7 +55,6 @@ def generate_local_paserk(
     password: str = "",
     wrapping_key: str = "",
 ) -> dict:
-
     if password and wrapping_key:
         raise ValueError("Only one of password or wrapping_key must be specified.")
     if not key_material:
