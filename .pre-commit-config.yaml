@@ -17,6 +17,12 @@ repos:
         args: [--ignore, "E203,E501,W503"]
         additional_dependencies: [flake8-bugbear]
 
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args: [--profile, "black"]
+
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.5.1
     hooks:
