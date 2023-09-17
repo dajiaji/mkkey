@@ -4,6 +4,31 @@ Changes
 Unreleased
 ----------
 
+Version 0.7.0
+-------------
+
+Released 2023-09-17
+
+- Add SECURITY.md. `#66 <https://github.com/dajiaji/pyseto/pull/66>`__
+- Drop support for Python3.7. `#63 <https://github.com/dajiaji/pyseto/pull/63>`__
+- Drop support for Python3.6. `#57 <https://github.com/dajiaji/pyseto/pull/57>`__
+- Update dependencies.
+    - Bump pyseto to 1.7.4. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
+    - Bump click to 8.1.7. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
+    - Bump shellingham to 1.5.3. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
+    - Bump click-help-colors to 0.9.2. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
+- Update dev dependencies.
+    - Bump pre-commit/isort to 5.12.0. `#67 <https://github.com/dajiaji/mkkey/pull/67>`__
+    - Bump pre-commit/black to 23.7.0. `#65 <https://github.com/dajiaji/mkkey/pull/65>`__
+    - Bump pre-commit/blacken-docs to 1.16.0. `#65 <https://github.com/dajiaji/mkkey/pull/65>`__
+    - Bump pre-commit/flake8 to 6.1.0. `#65 <https://github.com/dajiaji/mkkey/pull/65>`__
+    - Bump pre-commit/pre-commit-hooks to 4.4.0. `#65 <https://github.com/dajiaji/mkkey/pull/65>`__
+    - Bump pytest to 7.4.2. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
+    - Bump pytest-cov to 4.1.0. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
+    - Bump tox to 4.11.3. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
+    - Bump pre-commit to 3.4.0. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
+    - Bump PyJWT to 2.8.0. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
+
 Version 0.6.2
 -------------
 
