@@ -4,6 +4,29 @@ Changes
 Unreleased
 ----------
 
+Version 0.7.1
+-------------
+
+Released 2024-01-27
+
+- Add Python 3.12 to CI. `#90 <https://github.com/dajiaji/pyseto/pull/90>`__
+- Add Python 3.12 to tox.ini. `#80 <https://github.com/dajiaji/pyseto/pull/80>`__
+- Fix .readthedocs.yml. `#78 <https://github.com/dajiaji/pyseto/pull/78>`__
+- Update dependencies.
+    - Bump click-help-colors to 0.9.4. `#77 <https://github.com/dajiaji/pyseto/pull/77>`__
+    - Bump shellingham to 1.5.4. `#73 <https://github.com/dajiaji/pyseto/pull/73>`__
+- Update dev dependencies.
+    - Bump tox to 4.12.1. `#89 <https://github.com/dajiaji/pyseto/pull/89>`__
+    - Bump pre-commit/flake8 to 7.0.0. `#87 <https://github.com/dajiaji/mkkey/pull/87>`__
+    - Bump pytest to 7.4.4. `#85 <https://github.com/dajiaji/pyseto/pull/85>`__
+    - Bump pre-commit/black to 23.12.1. `#84 <https://github.com/dajiaji/mkkey/pull/84>`__
+    - Bump pre-commit/isort to 5.12.0. `#84 <https://github.com/dajiaji/mkkey/pull/84>`__
+    - Bump pre-commit/mirrors-mypy to 1.8.0. `#84 <https://github.com/dajiaji/mkkey/pull/84>`__
+    - Bump actions/{checkout, setup-python} to v4. `#79 <https://github.com/dajiaji/mkkey/pull/79>`__
+    - Bump pytest to 7.4.3. `#74 <https://github.com/dajiaji/pyseto/pull/74>`__
+    - Bump pre-commit to 3.5.0. `#71 <https://github.com/dajiaji/pyseto/pull/71>`__
+    - Bump pre-commit/pre-commit-hooks to 4.5.0. `#70 <https://github.com/dajiaji/mkkey/pull/70>`__
+
 Version 0.7.0
 -------------
 
