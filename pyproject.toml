@@ -29,7 +29,7 @@ shellingham = "^1.5.3"
 click-help-colors = "^0.9.2"
 
 [tool.poetry.dev-dependencies]
-pytest = "^8.1.1"
+pytest = "^8.3.1"
 pytest-cov = "^5.0.0"
 tox = "^4.14.2"
 pre-commit = "^3.5.0"
