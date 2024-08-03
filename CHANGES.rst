@@ -4,27 +4,46 @@ Changes
 Unreleased
 ----------
 
+Version 0.7.2
+-------------
+
+Released 2024-08-03
+
+- Update dependencies.
+    - Bump cryptography to 42.0.8. `#115 <https://github.com/dajiaji/mkkey/pull/115>`__
+- Update dev dependencies.
+    - Bump codecov/codecov-action to v4. `#121 <https://github.com/dajiaji/mkkey/pull/121>`__
+    - Bump setuptools to 70.0.0. `#118 <https://github.com/dajiaji/mkkey/pull/118>`__
+    - Bump tox to 4.16.0. `#117 <https://github.com/dajiaji/mkkey/pull/117>`__
+    - Bump blacken-docs to 1.18.0. `#108 <https://github.com/dajiaji/mkkey/pull/108>`__
+    - Bump pre-commit/black to 24.4.2. `#108 <https://github.com/dajiaji/mkkey/pull/108>`__
+    - Bump pre-commit/flake8 to 7.1.0. `#108 <https://github.com/dajiaji/mkkey/pull/108>`__
+    - Bump pre-commit/mirrors-mypy to 1.11.0. `#108 <https://github.com/dajiaji/mkkey/pull/108>`__
+    - Bump pre-commit/pre-commit-hooks to 4.6.0. `#108 <https://github.com/dajiaji/mkkey/pull/108>`__
+    - Bump pytest-cov to 5.0.0. `#106 <https://github.com/dajiaji/mkkey/pull/106>`__
+    - Bump pytest to 8.1.1. `#103 <https://github.com/dajiaji/mkkey/pull/103>`__
+
 Version 0.7.1
 -------------
 
 Released 2024-01-27
 
-- Add Python 3.12 to CI. `#90 <https://github.com/dajiaji/pyseto/pull/90>`__
-- Add Python 3.12 to tox.ini. `#80 <https://github.com/dajiaji/pyseto/pull/80>`__
-- Fix .readthedocs.yml. `#78 <https://github.com/dajiaji/pyseto/pull/78>`__
+- Add Python 3.12 to CI. `#90 <https://github.com/dajiaji/mkkey/pull/90>`__
+- Add Python 3.12 to tox.ini. `#80 <https://github.com/dajiaji/mkkey/pull/80>`__
+- Fix .readthedocs.yml. `#78 <https://github.com/dajiaji/mkkey/pull/78>`__
 - Update dependencies.
-    - Bump click-help-colors to 0.9.4. `#77 <https://github.com/dajiaji/pyseto/pull/77>`__
-    - Bump shellingham to 1.5.4. `#73 <https://github.com/dajiaji/pyseto/pull/73>`__
+    - Bump click-help-colors to 0.9.4. `#77 <https://github.com/dajiaji/mkkey/pull/77>`__
+    - Bump shellingham to 1.5.4. `#73 <https://github.com/dajiaji/mkkey/pull/73>`__
 - Update dev dependencies.
-    - Bump tox to 4.12.1. `#89 <https://github.com/dajiaji/pyseto/pull/89>`__
+    - Bump tox to 4.12.1. `#89 <https://github.com/dajiaji/mkkey/pull/89>`__
     - Bump pre-commit/flake8 to 7.0.0. `#87 <https://github.com/dajiaji/mkkey/pull/87>`__
-    - Bump pytest to 7.4.4. `#85 <https://github.com/dajiaji/pyseto/pull/85>`__
+    - Bump pytest to 7.4.4. `#85 <https://github.com/dajiaji/mkkey/pull/85>`__
     - Bump pre-commit/black to 23.12.1. `#84 <https://github.com/dajiaji/mkkey/pull/84>`__
     - Bump pre-commit/isort to 5.12.0. `#84 <https://github.com/dajiaji/mkkey/pull/84>`__
     - Bump pre-commit/mirrors-mypy to 1.8.0. `#84 <https://github.com/dajiaji/mkkey/pull/84>`__
     - Bump actions/{checkout, setup-python} to v4. `#79 <https://github.com/dajiaji/mkkey/pull/79>`__
-    - Bump pytest to 7.4.3. `#74 <https://github.com/dajiaji/pyseto/pull/74>`__
-    - Bump pre-commit to 3.5.0. `#71 <https://github.com/dajiaji/pyseto/pull/71>`__
+    - Bump pytest to 7.4.3. `#74 <https://github.com/dajiaji/mkkey/pull/74>`__
+    - Bump pre-commit to 3.5.0. `#71 <https://github.com/dajiaji/mkkey/pull/71>`__
     - Bump pre-commit/pre-commit-hooks to 4.5.0. `#70 <https://github.com/dajiaji/mkkey/pull/70>`__
 
 Version 0.7.0
@@ -32,25 +51,25 @@ Version 0.7.0
 
 Released 2023-09-17
 
-- Add SECURITY.md. `#66 <https://github.com/dajiaji/pyseto/pull/66>`__
-- Drop support for Python3.7. `#63 <https://github.com/dajiaji/pyseto/pull/63>`__
-- Drop support for Python3.6. `#57 <https://github.com/dajiaji/pyseto/pull/57>`__
+- Add SECURITY.md. `#66 <https://github.com/dajiaji/mkkey/pull/66>`__
+- Drop support for Python3.7. `#63 <https://github.com/dajiaji/mkkey/pull/63>`__
+- Drop support for Python3.6. `#57 <https://github.com/dajiaji/mkkey/pull/57>`__
 - Update dependencies.
-    - Bump pyseto to 1.7.4. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
-    - Bump click to 8.1.7. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
-    - Bump shellingham to 1.5.3. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
-    - Bump click-help-colors to 0.9.2. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
+    - Bump mkkey to 1.7.4. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
+    - Bump click to 8.1.7. `#64 <https://github.com/dajiaji/mkkey/pull/64>`__
+    - Bump shellingham to 1.5.3. `#64 <https://github.com/dajiaji/mkkey/pull/64>`__
+    - Bump click-help-colors to 0.9.2. `#64 <https://github.com/dajiaji/mkkey/pull/64>`__
 - Update dev dependencies.
     - Bump pre-commit/isort to 5.12.0. `#67 <https://github.com/dajiaji/mkkey/pull/67>`__
     - Bump pre-commit/black to 23.7.0. `#65 <https://github.com/dajiaji/mkkey/pull/65>`__
     - Bump pre-commit/blacken-docs to 1.16.0. `#65 <https://github.com/dajiaji/mkkey/pull/65>`__
     - Bump pre-commit/flake8 to 6.1.0. `#65 <https://github.com/dajiaji/mkkey/pull/65>`__
     - Bump pre-commit/pre-commit-hooks to 4.4.0. `#65 <https://github.com/dajiaji/mkkey/pull/65>`__
-    - Bump pytest to 7.4.2. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
-    - Bump pytest-cov to 4.1.0. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
-    - Bump tox to 4.11.3. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
-    - Bump pre-commit to 3.4.0. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
-    - Bump PyJWT to 2.8.0. `#64 <https://github.com/dajiaji/pyseto/pull/64>`__
+    - Bump pytest to 7.4.2. `#64 <https://github.com/dajiaji/mkkey/pull/64>`__
+    - Bump pytest-cov to 4.1.0. `#64 <https://github.com/dajiaji/mkkey/pull/64>`__
+    - Bump tox to 4.11.3. `#64 <https://github.com/dajiaji/mkkey/pull/64>`__
+    - Bump pre-commit to 3.4.0. `#64 <https://github.com/dajiaji/mkkey/pull/64>`__
+    - Bump PyJWT to 2.8.0. `#64 <https://github.com/dajiaji/mkkey/pull/64>`__
 
 Version 0.6.2
 -------------
@@ -58,7 +77,7 @@ Version 0.6.2
 Released 2022-08-11
 
 - Update dependencies.
-    - Bump cryptography to >=36,<38. `#43 <https://github.com/dajiaji/pyseto/pull/43>`__
+    - Bump cryptography to >=36,<38. `#43 <https://github.com/dajiaji/mkkey/pull/43>`__
 - Update dev dependencies.
     - Bump pre-commit/flake8 to 5.0.4. `#51 <https://github.com/dajiaji/mkkey/pull/51>`__
     - Bump mypy to 0.971. `#49 <https://github.com/dajiaji/mkkey/pull/49>`__
