@@ -143,7 +143,10 @@ def test_jwk_with_invalid_args_handled_by_click(args, msg):
     "args, msg",
     [
         (["v2", "local", "mysecret"], "Failed to make key: key must be 32 bytes long."),
-        (["v1", "public", "--key-size", "256"], "Failed to make key: key_size must be at least 512-bits."),
+        (
+            ["v1", "public", "--key-size", "256"],
+            "Failed to make key: key_size must be at least",
+        ),  # 512-bits (< cryptograph@43), 1024-bits (>= cryptograph@43)
     ],
 )
 def test_paserk_with_invalid_args(args, msg):

@@ -22,7 +22,7 @@ include = [
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0"
-cryptography = "^42.0.1"
+cryptography = ">=42.0.1,<44.0.0"
 pyseto = "^1.7.8"
 click = "^8.1.7"
 shellingham = "^1.5.3"
