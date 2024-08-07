@@ -48,7 +48,7 @@ def test_generate_public_paserk(version, kid, password, wrapping_key, rsa_key_si
         (0, False, "", "", 0, "Invalid version: 0."),
         (-1, False, "", "", 0, "Invalid version: -1."),
         (100, False, "", "", 0, "Invalid version: 100."),
-        (1, False, "", "", 256, "key_size must be at least 512-bits."),
+        (1, False, "", "", 256, "key_size must be at least"),  # 512-bits (< cryptograph@43), 1024-bits (>= cryptograph@43)
         (1, False, "mysecret", "outsecret", 0, "Only one of password or wrapping_key must be specified."),
     ],
 )
