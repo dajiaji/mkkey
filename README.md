@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/mkkey.svg)](https://badge.fury.io/py/mkkey)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mkkey)
-![Github CI](https://github.com/dajiaji/mkkey/actions/workflows/python-package.yml/badge.svg)
+![Github CI](https://github.com/dajiaji/mkkey/actions/workflows/ci.yml/badge.svg)
 [![codecov](https://codecov.io/gh/dajiaji/mkkey/branch/main/graph/badge.svg?token=QN8GXEYEP3)](https://codecov.io/gh/dajiaji/mkkey)
 
 mkkey is a CLI tool for generating following application-layer keys:
